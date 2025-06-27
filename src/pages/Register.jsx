@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import smallclock from '../assets/clock1.png';
 import bigclock from '../assets/clock2.png';
+import logo from '../assets/logo.png'; // 
 
 const Register = () => {
   const navigate = useNavigate();
@@ -34,6 +35,21 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-[#1952CC] flex items-center justify-center relative overflow-hidden">
+
+      {/* Navbar */}
+<nav className="absolute top-0 left-0 w-full bg-white/90 shadow-md py-3 px-8 flex justify-between items-center z-20">
+  <div className="flex items-center gap-2">
+    <img src={logo} alt="Time Pro Logo" className="h-10" />
+    <h2 className="text-xl font-bold text-[#094DB1]">Time Pro</h2>
+  </div>
+  <div className="space-x-4">
+    <Link to="/" className="text-[#094DB1] font-medium hover:underline">Home</Link>
+    <Link to="/login" className="text-[#094DB1] font-medium hover:underline">Login</Link>
+    <Link to="/register" className="bg-[#E4ED73] text-black px-4 py-1 rounded-full hover:bg-[#dfe867] transition">Sign Up</Link>
+  </div>
+</nav>
+
+      
       <div className="absolute top-0 left-0">
         <img src={smallclock} alt="Small Clock" className="w-30" />
       </div>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import smallclock from '../assets/clock1.png';
 import bigclock from '../assets/clock2.png';
 import { GoogleLogin } from '@react-oauth/google';
+import logo from '../assets/logo.png'; 
 
 
 const Login = () => {
@@ -54,6 +55,20 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-[#1952CC] flex items-center justify-center relative overflow-hidden">
+    {/* Navbar */}
+
+<nav className="absolute top-0 left-0 w-full bg-white/90 shadow-md py-3 px-8 flex justify-between items-center z-20">
+  <div className="flex items-center gap-2">
+    <img src={logo} alt="Time Pro Logo" className="h-10" />
+    <h2 className="text-xl font-bold text-[#094DB1]">Time Pro</h2>
+  </div>
+  <div className="space-x-4">
+    <Link to="/" className="text-[#094DB1] font-medium hover:underline">Home</Link>
+    <Link to="/login" className="text-[#094DB1] font-medium hover:underline">Login</Link>
+    <Link to="/register" className="bg-[#E4ED73] text-black px-4 py-1 rounded-full hover:bg-[#dfe867] transition">Sign Up</Link>
+  </div>
+</nav>
+
       {/* Background clocks */}
       <div className="absolute top-0 left-0">
         <img src={smallclock} alt="Small Clock" className="w-30" />
@@ -63,7 +78,7 @@ const Login = () => {
       </div>
 
       {/* Login Box */}
-      <div className="bg-[#F5F5F5] rounded-[30px] shadow-2xl px-20 py-20 w-full max-w-lg z-10">
+      <div className="bg-[#F5F5F5] rounded-[30px] shadow-2xl px-20 py-20 w-full max-w-lg z-10 mt-5">
         <h1 className="text-3xl font-bold text-center text-[#1F1F1F] mb-5">Time Pro</h1>
         <p className="text-lg text-center text-gray-600">User Login</p>
 
