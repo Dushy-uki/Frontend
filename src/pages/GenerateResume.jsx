@@ -74,8 +74,9 @@ const GenerateResume = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/resume/generate',
+      'http://localhost:5000/api/resume/generate', 
         {
+           userId: user._id, // <-- Make sure this is passed
           ...formData,
           skills: formData.skills.split(',').map(skill => skill.trim()),
         },
@@ -209,18 +210,7 @@ const GenerateResume = () => {
             <button
               onClick={async () => {
                 setShowPaymentPrompt(false);
-                try {
-                  await axios.post('http://localhost:5000/api/payment/record', {
-                    userId: user._id,
-                    name: formData.name,
-                    email: formData.email,
-                    purpose: "Resume Download",
-                    amount: 200
-                  });
-                } catch (err) {
-                  console.error("Failed to save payment record:", err);
-                }
-                generateAndDownloadResume();
+                await generateAndDownloadResume();
               }}
               className="bg-[#094DB1] text-white px-6 py-3 rounded-lg hover:bg-blue-700"
             >
