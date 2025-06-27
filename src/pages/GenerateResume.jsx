@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { FaHome, FaBriefcase, FaClipboardList, FaUserEdit, FaFileAlt } from 'react-icons/fa';
+
 
 const GenerateResume = () => {
   const [formData, setFormData] = useState({
@@ -100,15 +102,26 @@ const GenerateResume = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <aside className="w-64 bg-[#094DB1] text-white p-6 min-h-screen">
-        <nav className="flex flex-col space-y-5 mt-10 font-medium">
-          <Link to="/dashboard" className="hover:text-yellow-300 transition">Dashboard</Link>
-          <Link to="/jobs" className="hover:text-yellow-300 transition">Job Listings</Link>
-          <Link to="/applications" className="hover:text-yellow-300 transition">My Applications</Link>
-          <Link to="/resume" className="hover:text-yellow-300 transition">Resume</Link>
-          <Link to="/edit-profile" className="hover:text-yellow-300 transition">Edit Profile</Link>
-        </nav>
-      </aside>
+       <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
+                    <nav className="flex flex-col space-y-4 mt-10 text-md">
+                      <Link to="/dashboard" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                        <FaHome /> Dashboard
+                      </Link>
+                      <Link to="/jobs" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                        <FaBriefcase /> Job Listing
+                      </Link>
+                      <Link to="/applications" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                        <FaClipboardList /> My Application
+                      </Link>
+                      <Link to="/resume" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                        <FaFileAlt /> My Resume
+                      </Link>
+                      <Link to="/edit-profile" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                        <FaUserEdit /> Edit Profile
+                      </Link>
+                    </nav>
+                  </aside>
+      
 
       <div className="flex-1 flex flex-col">
         <header className="flex justify-between items-center bg-white shadow px-8 py-4">

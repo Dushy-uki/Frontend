@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { FaHome, FaBriefcase, FaClipboardList, FaUserEdit, FaFileAlt } from 'react-icons/fa';
+
 
 const MyApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -32,15 +34,26 @@ const MyApplications = () => {
   return (
     <div className="flex min-h-screen font-sans">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#094DB1] text-white p-6">
-             <nav className="flex flex-col space-y-5 mt-10">
-               <Link to="/dashboard" className="border-b pb-1">Dashboard</Link>
-               <Link to="/jobs" className="border-b pb-1">Job Listing</Link>
-               <Link to="/applications" className="border-b pb-1">My Application</Link>
-               <Link to="/resume" className="border-b pb-1">My Resume</Link>
-               <Link to="/edit-profile" className="border-b pb-1">Edit Profile</Link>
-             </nav>
-           </aside>
+      <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
+                   <nav className="flex flex-col space-y-4 mt-10 text-md">
+                     <Link to="/dashboard" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                       <FaHome /> Dashboard
+                     </Link>
+                     <Link to="/jobs" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                       <FaBriefcase /> Job Listing
+                     </Link>
+                     <Link to="/applications" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                       <FaClipboardList /> My Application
+                     </Link>
+                     <Link to="/resume" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                       <FaFileAlt /> My Resume
+                     </Link>
+                     <Link to="/edit-profile" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                       <FaUserEdit /> Edit Profile
+                     </Link>
+                   </nav>
+                 </aside>
+     
 
       {/* Main Content */}
       <main className="flex-1 bg-gray-100">
