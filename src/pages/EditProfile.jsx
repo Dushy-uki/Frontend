@@ -5,7 +5,6 @@ import logo from '../assets/logo.png';
 import { toast } from 'react-toastify';
 import { FaHome, FaBriefcase, FaClipboardList, FaUserEdit, FaFileAlt } from 'react-icons/fa';
 
-
 const EditProfile = () => {
   const navigate = useNavigate();
 
@@ -29,11 +28,7 @@ const EditProfile = () => {
         bio: user.bio || '',
         avatar: user.avatar || null,
       });
-
-      // Show existing avatar
-      if (user.avatar) {
-        setPreview(user.avatar);
-      }
+      if (user.avatar) setPreview(user.avatar);
     }
   }, []);
 
@@ -51,34 +46,18 @@ const EditProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    console.log('Raw localStorage user:', localStorage.getItem('user'));
+    const userString = localStorage.getItem('user');
+    if (!userString) return alert('No user found in localStorage');
 
-      const userString = localStorage.getItem('user');
-
-    if (!userString) {
-    alert('No user found in localStorage');
-    return;
-  }
-
-  const user = JSON.parse(userString);
-  console.log('Parsed user:', user);
-
-const userId = user._id || user.id;
-  console.log('Extracted userId:', userId);
-
-
-  if (!userId) {
-    alert('User ID is missing');
-    return;
-  }
+    const user = JSON.parse(userString);
+    const userId = user._id || user.id;
+    if (!userId) return alert('User ID is missing');
 
     const profileData = new FormData();
     profileData.append('name', formData.name);
     profileData.append('email', formData.email);
     profileData.append('skills', formData.skills);
     profileData.append('bio', formData.bio);
-    // localStorage.setItem('user', JSON.stringify(response.data.user)); // save latest user
-
     if (formData.avatar instanceof File) {
       profileData.append('avatar', formData.avatar);
     }
@@ -90,136 +69,73 @@ const userId = user._id || user.id;
           Authorization: `Bearer ${token}`,
         },
       });
-          localStorage.setItem('user', JSON.stringify(res.data.user));
-
-
       localStorage.setItem('user', JSON.stringify(res.data.user));
-                    toast.success('Profile updated successfully!');
-
+      toast.success('Profile updated successfully!');
       navigate('/dashboard');
-
     } catch (err) {
       console.error(err);
-  toast.error('Profile update failed');
+      toast.error('Profile update failed');
     }
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Sidebar */}
+    <div className="min-h-screen flex bg-gray-50">
       <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-              <nav className="flex flex-col space-y-4 mt-10 text-md">
-                <Link to="/dashboard" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
-                  <FaHome /> Dashboard
-                </Link>
-                <Link to="/jobs" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
-                  <FaBriefcase /> Job Listing
-                </Link>
-                <Link to="/applications" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
-                  <FaClipboardList /> My Application
-                </Link>
-                <Link to="/resume" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
-                  <FaFileAlt /> My Resume
-                </Link>
-                <Link to="/edit-profile" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
-                  <FaUserEdit /> Edit Profile
-                </Link>
-              </nav>
-            </aside>
+        <nav className="flex flex-col space-y-4 mt-10 text-md">
+          <Link to="/dashboard" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaHome /> Dashboard</Link>
+          <Link to="/jobs" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaBriefcase /> Job Listing</Link>
+          <Link to="/applications" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaClipboardList /> My Application</Link>
+          <Link to="/resume" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaFileAlt /> My Resume</Link>
+          <Link to="/edit-profile" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaUserEdit /> Edit Profile</Link>
+        </nav>
+      </aside>
 
-      {/* Main Form */}
-      <div className="flex-1 bg-gray-100">
-        <div className="flex justify-between items-center bg-white shadow px-8 py-4">
+      <div className="flex-1">
+        <header className="flex justify-between items-center bg-white shadow px-8 py-4">
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-12" />
             <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
           </div>
-          <Link
-            to="/login"
-            className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition"
-          >
+          <Link to="/login" className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition">
             Login
           </Link>
-        </div>
+        </header>
 
-        <div className="bg-white p-8 rounded-xl shadow-md max-w-3xl mx-auto mt-19">
+        <main className="bg-white p-10 rounded-xl shadow-md max-w-3xl mx-auto mt-10">
           <h2 className="text-3xl font-bold text-black mb-2">Personal Information</h2>
           <p className="text-gray-600 mb-6">Update your personal details and academic background.</p>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="flex gap-6">
-              <div className="w-1/2">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="w-full md:w-1/2">
                 <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="mt-1 w-full px-4 py-2 rounded-full bg-gray-100 border-none focus:outline-none"
-                  required
-                />
+                <input type="text" name="name" value={formData.name} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#094DB1]" required />
               </div>
-
-              <div className="w-1/2">
+              <div className="w-full md:w-1/2">
                 <label className="block text-sm font-medium text-gray-700">Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="mt-1 w-full px-4 py-2 rounded-full bg-gray-100 border-none focus:outline-none"
-                  required
-                />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#094DB1]" required />
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700">Skills</label>
-              <input
-                type="text"
-                name="skills"
-                value={formData.skills}
-                onChange={handleChange}
-                className="mt-1 w-full px-4 py-2 rounded-full bg-gray-100 border-none focus:outline-none"
-              />
+              <input type="text" name="skills" value={formData.skills} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#094DB1]" />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700">Short Bio (Optional)</label>
-              <textarea
-                name="bio"
-                value={formData.bio}
-                onChange={handleChange}
-                rows={3}
-                className="mt-1 w-full px-4 py-2 rounded-xl bg-gray-100 border-none focus:outline-none"
-              ></textarea>
+              <textarea name="bio" value={formData.bio} onChange={handleChange} rows={3} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#094DB1]"></textarea>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700">Profile Photo</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="mt-1"
-              />
-              {preview && (
-                <img
-                  src={preview}
-                  alt="Preview"
-                  className="w-24 h-24 mt-2 rounded-full object-cover"
-                />
-              )}
+              <input type="file" accept="image/*" onChange={handleFileChange} className="mt-1" />
+              {preview && <img src={preview} alt="Preview" className="w-24 h-24 mt-2 rounded-full object-cover" />}
             </div>
 
-            <button
-              type="submit"
-              className="bg-blue-600 text-white py-2 px-6 rounded-full hover:bg-blue-700"
-            >
-              Save change
-            </button>
+            <button type="submit" className="bg-[#094DB1] text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition w-full">Save Changes</button>
           </form>
-        </div>
+        </main>
       </div>
     </div>
   );

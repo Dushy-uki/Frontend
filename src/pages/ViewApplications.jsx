@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../assets/logo.png';
+import { FaBriefcase, FaUserGraduate, FaUsers } from 'react-icons/fa';
+
 
 const ViewApplications = () => {
   const { jobId } = useParams();
@@ -48,14 +50,40 @@ const ViewApplications = () => {
   return (
     <div className="flex min-h-screen font-sans">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#094DB1] text-white p-6">
-        <nav className="space-y-6 mt-4">
-          <Link to="/admin" className="block border-b pb-1 hover:underline">Admin Dashboard</Link>
-          <Link to="/admin/user" className="block border-b pb-1">Manage Users</Link>
-          <Link to="/admin/manage-jobs" className="block border-b pb-1">Manage Jobs</Link>
-          <Link to="/admin/payment" className="block border-b pb-1">Payment</Link>
-        </nav>
-      </aside>
+      <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
+  <nav className="flex flex-col mt-10 space-y-5 text-md">
+    <Link
+      to="/admin"
+      className="text-xl font-bold text-white mb-4 border-b border-white pb-2"
+    >
+      Admin Dashboard
+    </Link>
+
+    <Link
+      to="/admin/manage-jobs"
+      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
+    >
+      <FaBriefcase className="text-lg" />
+      <span>Manage Jobs</span>
+    </Link>
+
+    <Link
+      to="/admin/user"
+      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
+    >
+      <FaUserGraduate className="text-lg" />
+      <span>Manage Users</span>
+    </Link>
+
+    <Link
+      to="/admin/payment"
+      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
+    >
+      <FaUsers className="text-lg" />
+      <span>Payments</span>
+    </Link>
+  </nav>
+</aside>
 
       {/* Main content */}
       <main className="flex-1 bg-gray-100">

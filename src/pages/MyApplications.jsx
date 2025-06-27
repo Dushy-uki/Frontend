@@ -73,7 +73,7 @@ const MyApplications = () => {
 
         {/* Application Section */}
         <section className="p-8">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800">My Job Applications</h2>
+          <h2 className="text-4xl font-bold mb-6 text-[#094DB1]">My Job Applications</h2>
 
           {loading ? (
             <p className="text-gray-500">Loading applications...</p>
@@ -83,7 +83,7 @@ const MyApplications = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {applications.map((app) => (
                 <div key={app._id} className="bg-white p-6 rounded-xl shadow-md space-y-3">
-                  <h3 className="text-lg font-bold text-[#094DB1]">
+                  <h3 className="text-lg font-bold text-black">
                     {app.job?.title || 'Untitled Job'}
                   </h3>
                   <p className="text-sm text-gray-600">
