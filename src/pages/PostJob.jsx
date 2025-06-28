@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import logo from '../assets/logo.png'; // 🖼️ Use your logo path
+import axios from 'axios';
+import logo from '../assets/logo.png';
 import { toast } from 'react-toastify';
 import { FaBriefcase, FaUserGraduate, FaUsers } from 'react-icons/fa';
-
 
 const PostJob = () => {
   const navigate = useNavigate();
@@ -16,65 +16,72 @@ const PostJob = () => {
     skills: '',
   });
 
-  
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setJobData({ ...jobData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!jobData.title || !jobData.company || !jobData.description) {
       toast.error('Please fill in all required fields');
       return;
     }
 
-    const existingJobs = JSON.parse(localStorage.getItem('jobs')) || [];
-    const updatedJobs = [...existingJobs, jobData];
-    localStorage.setItem('jobs', JSON.stringify(updatedJobs));
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.post('http://localhost:5000/api/jobs', jobData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    toast.success('Job posted successfully!');
-    navigate('/admin/manage-jobs');
+      toast.success('Job posted successfully!');
+      navigate('/admin/manage-jobs');
+    } catch (err) {
+      console.error('Job post failed:', err);
+      toast.error(err.response?.data?.error || 'Server error while posting job');
+    }
   };
 
   return (
     <div className="flex min-h-screen font-sans bg-gray-100">
       {/* Sidebar */}
       <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-  <nav className="flex flex-col mt-10 space-y-5 text-md">
-    <Link
-      to="/admin"
-      className="text-xl font-bold text-white mb-4 border-b border-white pb-2"
-    >
-      Admin Dashboard
-    </Link>
+        <nav className="flex flex-col mt-10 space-y-5 text-md">
+          <Link
+            to="/admin"
+            className="text-xl font-bold text-white mb-4 border-b border-white pb-2"
+          >
+            Admin Dashboard
+          </Link>
 
-    <Link
-      to="/admin/manage-jobs"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaBriefcase className="text-lg" />
-      <span>Manage Jobs</span>
-    </Link>
+          <Link
+            to="/admin/manage-jobs"
+            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
+          >
+            <FaBriefcase className="text-lg" />
+            <span>Manage Jobs</span>
+          </Link>
 
-    <Link
-      to="/admin/user"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaUserGraduate className="text-lg" />
-      <span>Manage Users</span>
-    </Link>
+          <Link
+            to="/admin/user"
+            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
+          >
+            <FaUserGraduate className="text-lg" />
+            <span>Manage Users</span>
+          </Link>
 
-    <Link
-      to="/admin/payment"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaUsers className="text-lg" />
-      <span>Payments</span>
-    </Link>
-  </nav>
-</aside>
+          <Link
+            to="/admin/payment"
+            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
+          >
+            <FaUsers className="text-lg" />
+            <span>Payments</span>
+          </Link>
+        </nav>
+      </aside>
 
       {/* Main Content */}
       <main className="flex-1">
@@ -165,9 +172,9 @@ const PostJob = () => {
               <div className="text-right">
                 <button
                   type="submit"
-                  className="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800"
+                  className="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition"
                 >
-                  Post job
+                  Post Job
                 </button>
               </div>
             </form>
