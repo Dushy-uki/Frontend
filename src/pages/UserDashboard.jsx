@@ -74,7 +74,7 @@ const UserDashboard = () => {
           </div>
 
           <div className="px-8 mr-9 mt-4">
-            <h2 className="text-3xl font-bold text-[#1F2937]">Welcome {user.name || 'User'}!</h2>
+            <h2 className="text-3xl font-bold text-[#094DB1]">Welcome {user.name || 'User'}!</h2>
             <p className="text-sm text-gray-600 mt-1">{user.email}</p>
             <p className="text-md text-gray-700 mt-2">Here's your job dashboard. Let's find your next opportunity.</p>
             {user.skills && <p className="text-sm text-gray-600 mt-1">Skills: {user.skills}</p>}
