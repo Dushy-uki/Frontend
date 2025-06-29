@@ -45,7 +45,7 @@ const ApplyJob = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!resume || !message) {
-      alert('Resume and message are required!');
+      toast.error('Resume and message are required!');
       return;
     }
 
