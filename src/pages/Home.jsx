@@ -31,13 +31,13 @@ export default function LandingPage() {
                 <p className="mt-4 text-xl py-2">Find remote jobs, create your profile, find jobs.</p>
                 <div className="mt-6 space-x-4 py-2">
                   <Link
-            to="/find-job"
+            to="/login"
             className="bg-[#E4ED73] px-6 py-3  text-black rounded-full font-medium hover:bg-[#d4de60]"
           >
             Find jobs
           </Link>
                   <Link
-            to="/create-job"
+            to="/login"
             className="bg-[#E4ED73] text-black px-6 py-3 rounded-full font-medium hover:bg-[#d4de60]"
           >
             Create your job
