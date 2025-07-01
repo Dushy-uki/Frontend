@@ -7,7 +7,6 @@ import {
   FaBriefcase,
   FaUserCircle,
   FaPlusCircle,
-  FaClipboardList,
 } from 'react-icons/fa';
 
 const PostJob = () => {
@@ -21,7 +20,6 @@ const PostJob = () => {
     skills: '',
   });
 
-  // Only providers can access
   useEffect(() => {
     const role = localStorage.getItem('role');
     if (role !== 'provider') {
@@ -46,7 +44,7 @@ const PostJob = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/provider/jobs`, jobData, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/provider/jobs`, jobData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -70,36 +68,26 @@ const PostJob = () => {
   };
 
   return (
-    <div className="flex min-h-screen font-sans bg-gray-100">
+    <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-purple-100">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-        <nav className="flex flex-col mt-10 space-y-5 text-md">
-          <Link
-            to="/provider"
-            className="text-xl font-bold text-white mb-4 border-b border-white pb-2"
-          >
-            <FaUserCircle className="inline-block mr-2" />
-            Provider Profile 
+      <aside className="w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white p-6 sticky top-0 min-h-screen shadow-lg">
+        <h2 className="text-2xl font-bold mb-6 animate-pulse">Time Pro</h2>
+        <nav className="flex flex-col space-y-5 text-md">
+          <Link to="/provider" className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded text-white font-semibold hover:bg-white/20">
+            <FaUserCircle /> Profile Overview
           </Link>
-          <Link
-            to="/post-job"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaPlusCircle />
-            <span>Post Job</span>
+          <Link to="/post-job" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
+            <FaPlusCircle /> Post New Job
           </Link>
-          <Link
-            to="/provider/posted-jobs"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaBriefcase />
-            <span>Posted Jobs</span>
+          <Link to="/provider/posted-jobs" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
+            <FaBriefcase /> Manage Jobs
           </Link>
         </nav>
       </aside>
 
       {/* Main Content */}
       <main className="flex-1">
+        {/* Header */}
         <header className="bg-white flex items-center justify-between px-8 py-4 shadow">
           <div className="flex items-center gap-3">
             <img src={logo} alt="Logo" className="w-10 h-10 rounded-full" />
@@ -107,37 +95,37 @@ const PostJob = () => {
           </div>
           <Link
             to="/login"
-            className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700"
+            className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition"
           >
             Logout
           </Link>
         </header>
 
         {/* Form Section */}
-        <section className="flex justify-center py-10 px-4">
-          <div className="bg-white p-8 rounded-2xl w-full max-w-3xl shadow-lg">
-            <h2 className="text-2xl font-bold mb-2">Post a New Job</h2>
-            <p className="text-sm mb-6">Fill in the information below to create a new job listing.</p>
+        <section className="flex justify-center py-10 px-4 bg-gradient-to-br from-blue-50 via-white to-purple-100">
+          <div className="bg-white p-8 rounded-2xl w-full max-w-3xl shadow-xl border-2 border-blue-500">
+            <h2 className="text-3xl font-bold text-blue-800 mb-2">Post a New Job</h2>
+            <p className="text-sm text-gray-500 mb-6">Fill in the information below to create a new job listing.</p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
                   type="text"
                   name="title"
-                  placeholder="Job Title"
+                  placeholder="Job Title *"
                   value={jobData.title}
                   onChange={handleChange}
                   required
-                  className="p-3 rounded-md w-full border shadow focus:ring-2 focus:ring-blue-400 outline-none"
+                  className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none"
                 />
                 <input
                   type="text"
                   name="companyName"
-                  placeholder="Company Name"
+                  placeholder="Company Name *"
                   value={jobData.companyName}
                   onChange={handleChange}
                   required
-                  className="p-3 rounded-md w-full border shadow focus:ring-2 focus:ring-blue-400 outline-none"
+                  className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none"
                 />
               </div>
 
@@ -147,17 +135,17 @@ const PostJob = () => {
                 placeholder="Location"
                 value={jobData.location}
                 onChange={handleChange}
-                className="p-3 rounded-md w-full border shadow focus:ring-2 focus:ring-blue-400 outline-none"
+                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none w-full"
               />
 
               <textarea
                 name="description"
-                placeholder="Job Description"
+                placeholder="Job Description *"
                 value={jobData.description}
                 onChange={handleChange}
                 rows={4}
                 required
-                className="p-3 rounded-md w-full border shadow focus:ring-2 focus:ring-blue-400 outline-none"
+                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none w-full"
               ></textarea>
 
               <input
@@ -166,22 +154,22 @@ const PostJob = () => {
                 placeholder="Salary (e.g., ₹15000/month)"
                 value={jobData.salary}
                 onChange={handleChange}
-                className="p-3 rounded-md w-full border shadow focus:ring-2 focus:ring-blue-400 outline-none"
+                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none w-full"
               />
 
               <input
                 type="text"
                 name="skills"
-                placeholder="Required Skills (Optional)"
+                placeholder="Required Skills (comma-separated)"
                 value={jobData.skills}
                 onChange={handleChange}
-                className="p-3 rounded-md w-full border shadow focus:ring-2 focus:ring-blue-400 outline-none"
+                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none w-full"
               />
 
               <div className="text-right">
                 <button
                   type="submit"
-                  className="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition"
+                  className="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition-all shadow-md"
                 >
                   Post Job
                 </button>
@@ -189,6 +177,12 @@ const PostJob = () => {
             </form>
           </div>
         </section>
+
+        {/* Footer */}
+        <footer className="bg-white py-4 text-center text-sm text-gray-500 border-t mt-5">
+          <img src={logo} alt="Time Pro Logo" className="h-6 mx-auto mb-2" />
+          <p>© 2025 Time Pro • Empowering careers one job at a time.</p>
+        </footer>
       </main>
     </div>
   );
