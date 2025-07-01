@@ -32,20 +32,20 @@ const ApplicationsByJob = () => {
   };
 
   const handleStatusChange = async (id, status) => {
-    try {
-      const token = localStorage.getItem('token');
-      await axios.put(
-        `${import.meta.env.VITE_API_URL}/provider/applications/${id}/status`,
-        { status },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      toast.success('Status updated');
-      fetchApplications();
-    } catch (error) {
-      console.error('Error updating status:', error);
-      toast.error('Failed to update status');
-    }
-  };
+  try {
+    const token = localStorage.getItem('token');
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/provider/applications/${id}/status`,
+      { status },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    toast.success('Status updated and email sent');
+    fetchApplications(); // refresh the list
+  } catch (error) {
+    console.error('Error updating status:', error);
+    toast.error('Failed to update status');
+  }
+};
 
   useEffect(() => {
     if (jobId) fetchApplications();
@@ -64,9 +64,6 @@ const ApplicationsByJob = () => {
           </Link>
           <Link to="/provider/posted-jobs" className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2">
             <FaBriefcase /> <span>Posted Jobs</span>
-          </Link>
-          <Link to="/provider/applications" className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2">
-            <FaClipboardList /> <span>Applications</span>
           </Link>
         </nav>
       </aside>
@@ -91,17 +88,36 @@ const ApplicationsByJob = () => {
           ) : (
             <div className="space-y-4">
               {applications.map((app) => (
-                <div key={app._id} className="bg-white p-5 rounded-lg shadow">
-                  <p><strong>Name:</strong> {app.applicant?.name}</p>
-                  <p><strong>Email:</strong> {app.applicant?.email}</p>
-                  <p><strong>Status:</strong> {app.status}</p>
-                  <div className="mt-3 flex gap-3">
-                    <button onClick={() => handleStatusChange(app._id, 'accepted')} className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700">Accept</button>
-                    <button onClick={() => handleStatusChange(app._id, 'rejected')} className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700">Reject</button>
-                    <button onClick={() => handleStatusChange(app._id, 'pending')} className="bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600">Pending</button>
-                  </div>
-                </div>
-              ))}
+  <div key={app._id} className="bg-white p-5 rounded-lg shadow">
+    <p><strong>Name:</strong> {app.applicant?.name}</p>
+    <p><strong>Email:</strong> {app.applicant?.email}</p>
+    <p><strong>Status:</strong> {app.status}</p>
+
+    {/* View Resume Button */}
+    {app.resumeUrl && (
+      <p className="mt-2">
+        <strong>Resume:</strong>{' '}
+        <a
+          href={app.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline"
+        >
+          View Resume
+        </a>
+      </p>
+    )}
+
+    {/* Status Control */}
+    <div className="mt-3 flex gap-3">
+      <button onClick={() => handleStatusChange(app._id, 'accepted')} className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700">Accept</button>
+      <button onClick={() => handleStatusChange(app._id, 'rejected')} className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700">Reject</button>
+      <button onClick={() => handleStatusChange(app._id, 'pending')} className="bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600">Pending</button>
+    </div>
+  </div>
+))}
+
+              
             </div>
           )}
         </section>

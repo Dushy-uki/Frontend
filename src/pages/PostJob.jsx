@@ -95,13 +95,6 @@ const PostJob = () => {
             <FaBriefcase />
             <span>Posted Jobs</span>
           </Link>
-          <Link
-            to="/provider/applications"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaClipboardList />
-            <span>Applications</span>
-          </Link>
         </nav>
       </aside>
 
