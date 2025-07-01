@@ -3,14 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import smallclock from '../assets/clock1.png';
 import bigclock from '../assets/clock2.png';
-import logo from '../assets/logo.png'; // 
+import logo from '../assets/logo.png';
 
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    role: 'user' // default role
   });
 
   const handleChange = (e) => {
@@ -37,27 +38,27 @@ const Register = () => {
     <div className="min-h-screen bg-[#1952CC] flex items-center justify-center relative overflow-hidden">
 
       {/* Navbar */}
-<nav className="absolute top-0 left-0 w-full bg-white/90 shadow-md py-3 px-8 flex justify-between items-center z-20">
-  <div className="flex items-center gap-2">
-    <img src={logo} alt="Time Pro Logo" className="h-10" />
-    <h2 className="text-xl font-bold text-[#094DB1]">Time Pro</h2>
-  </div>
-  <div className="space-x-4">
-    <Link to="/" className="text-[#094DB1] font-medium hover:underline">Home</Link>
-    <Link to="/login" className="text-[#094DB1] font-medium hover:underline">Login</Link>
-    <Link to="/register" className="bg-[#E4ED73] text-black px-4 py-1 rounded-full hover:bg-[#dfe867] transition">Sign Up</Link>
-  </div>
-</nav>
+      <nav className="absolute top-0 left-0 w-full bg-white/90 shadow-md py-3 px-8 flex justify-between items-center z-20">
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="Time Pro Logo" className="h-10" />
+          <h2 className="text-xl font-bold text-[#094DB1]">Time Pro</h2>
+        </div>
+        <div className="space-x-4">
+          <Link to="/" className="text-[#094DB1] font-medium hover:underline">Home</Link>
+          <Link to="/login" className="text-[#094DB1] font-medium hover:underline">Login</Link>
+          <Link to="/register" className="bg-[#E4ED73] text-black px-4 py-1 rounded-full hover:bg-[#dfe867] transition">Sign Up</Link>
+        </div>
+      </nav>
 
-      
+      {/* Background Clocks */}
       <div className="absolute top-0 left-0">
         <img src={smallclock} alt="Small Clock" className="w-30" />
       </div>
-
       <div className="absolute bottom-0 right-0">
         <img src={bigclock} alt="Big Clock" className="w-60" />
       </div>
 
+      {/* Form Box */}
       <div className="bg-[#F5F5F5] rounded-[30px] shadow-2xl px-20 py-20 w-full max-w-lg z-10">
         <h1 className="text-3xl font-bold text-center text-[#1F1F1F]">Time Pro</h1>
         <p className="text-lg text-center text-gray-600 mb-8">Create your account</p>
@@ -100,6 +101,21 @@ const Register = () => {
               className="mt-1 block w-full px-4 py-2 rounded-md bg-[#E9DCDC] border-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
+          </div>
+
+          {/* Role Dropdown */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Register As</label>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="mt-1 block w-full px-4 py-2 rounded-md bg-[#E9DCDC] border-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="user">User</option>
+              <option value="provider">Provider</option>
+            </select>
           </div>
 
           <button

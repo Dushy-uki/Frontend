@@ -17,6 +17,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import GenerateResume from './pages/GenerateResume.jsx';
 import PaymentSuccess from './pages/payment.jsx';
 import AdminPayments from './pages/AdminPayment.jsx';
+import Provider from './pages/Providers.jsx';
+import PostedJobs from './pages/PostedJobs.jsx';
+import ProviderApplication from './pages/ProviderApplication.jsx';
+import ApplicationsByJob from './pages/ProviderApplication.jsx'; // adjust path as needed
+
 
 
 function App() {
@@ -42,7 +47,7 @@ function App() {
       <Route path="/resume" element={<GenerateResume />} />
       <Route path="/admin" element={<AdminDashboard />} /> 
       <Route path="/admin/manage-jobs" element={<ManageJobs />} />
-      <Route path="/admin/post-job" element={<PostJob />} />
+      <Route path="/post-job" element={<PostJob />} />
       <Route path="/apply/:jobId" element={<ApplyJob />} />
       <Route path="/admin/applications/:jobId" element={<ViewApplications />} />
       <Route path="/applications" element={<MyApplications />} />
@@ -51,6 +56,11 @@ function App() {
       <Route path="/payment" element={<PaymentSuccess />} />
       <Route path="/admin/payment" element={<AdminPayments />} />
       <Route path="/generate-resume" element={<GenerateResume />} />
+      <Route path="/provider" element={<Provider />} />
+      <Route path="/provider/posted-jobs" element={<PostedJobs />} />
+      <Route path="/provider/applications" element={<ProviderApplication />} />
+      <Route path="/job/:jobId/applications" element={<ApplicationsByJob />} />
+
 
       {/* Add more routes as needed */}
     </Routes>

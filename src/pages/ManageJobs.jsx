@@ -103,12 +103,7 @@ const ManageJobs = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="p-3 rounded-lg w-full md:w-1/2 border border-gray-300 focus:outline-blue-500"
             />
-            <Link
-              to="/admin/post-job"
-              className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 text-center"
-            >
-              + Post job
-            </Link>
+            
           </div>
 
           {/* Job Cards */}

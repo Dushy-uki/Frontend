@@ -6,12 +6,23 @@ import bigclock from '../assets/clock2.png';
 import { GoogleLogin } from '@react-oauth/google';
 import logo from '../assets/logo.png'; 
 
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const redirectByRole = (role) => {
+    if (role === 'admin') {
+      navigate('/admin');
+    } else if (role === 'user') {
+      navigate('/dashboard');
+    } else if (role === 'provider') {
+      navigate('/provider');
+    } else {
+      navigate('/');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,20 +41,12 @@ const Login = () => {
         throw new Error('Invalid response from server');
       }
 
-      localStorage.clear(); // Clears all localStorage
-
+      localStorage.clear();
       localStorage.setItem('token', data.token);
       localStorage.setItem('role', data.user.role);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      const role = data.user.role;
-      if (role === 'admin') {
-        navigate('/admin');
-      } else if (role === 'user') {
-        navigate('/dashboard');
-      } else {
-        navigate('/');
-      }
+      redirectByRole(data.user.role);
     } catch (error) {
       setLoading(false);
       console.error('Login Error:', error);
@@ -51,25 +54,20 @@ const Login = () => {
     }
   };
 
-
-
   return (
     <div className="min-h-screen bg-[#1952CC] flex items-center justify-center relative overflow-hidden">
-    {/* Navbar */}
+      <nav className="absolute top-0 left-0 w-full bg-white/90 shadow-md py-3 px-8 flex justify-between items-center z-20">
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="Time Pro Logo" className="h-10" />
+          <h2 className="text-xl font-bold text-[#094DB1]">Time Pro</h2>
+        </div>
+        <div className="space-x-4">
+          <Link to="/" className="text-[#094DB1] font-medium hover:underline">Home</Link>
+          <Link to="/login" className="text-[#094DB1] font-medium hover:underline">Login</Link>
+          <Link to="/register" className="bg-[#E4ED73] text-black px-4 py-1 rounded-full hover:bg-[#dfe867] transition">Sign Up</Link>
+        </div>
+      </nav>
 
-<nav className="absolute top-0 left-0 w-full bg-white/90 shadow-md py-3 px-8 flex justify-between items-center z-20">
-  <div className="flex items-center gap-2">
-    <img src={logo} alt="Time Pro Logo" className="h-10" />
-    <h2 className="text-xl font-bold text-[#094DB1]">Time Pro</h2>
-  </div>
-  <div className="space-x-4">
-    <Link to="/" className="text-[#094DB1] font-medium hover:underline">Home</Link>
-    <Link to="/login" className="text-[#094DB1] font-medium hover:underline">Login</Link>
-    <Link to="/register" className="bg-[#E4ED73] text-black px-4 py-1 rounded-full hover:bg-[#dfe867] transition">Sign Up</Link>
-  </div>
-</nav>
-
-      {/* Background clocks */}
       <div className="absolute top-0 left-0">
         <img src={smallclock} alt="Small Clock" className="w-30" />
       </div>
@@ -77,7 +75,6 @@ const Login = () => {
         <img src={bigclock} alt="Big Clock" className="w-60" />
       </div>
 
-      {/* Login Box */}
       <div className="bg-[#F5F5F5] rounded-[30px] shadow-2xl px-20 py-20 w-full max-w-lg z-10 mt-5">
         <h1 className="text-3xl font-bold text-center text-[#1F1F1F] mb-5">Time Pro</h1>
         <p className="text-lg text-center text-gray-600">User Login</p>
@@ -116,49 +113,39 @@ const Login = () => {
           </button>
         </form>
 
-        {/* OR Divider */}
         <div className="flex items-center my-4">
           <hr className="flex-grow border-gray-300" />
           <span className="mx-4 text-gray-500">or</span>
           <hr className="flex-grow border-gray-300" />
         </div>
 
-        {/* Google Login Button */}
-         <div>
-      <h2>Sign in with Google</h2>
-      <GoogleLogin
-  onSuccess={async (credentialResponse) => {
-    try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/google-login`, {
-        token: credentialResponse.credential,
-      });
+        <div>
+          <h2 className="text-center mb-2">Sign in with Google</h2>
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              try {
+                const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/google-login`, {
+                  token: credentialResponse.credential,
+                });
 
-      const data = res.data;
+                const data = res.data;
 
-      localStorage.clear();
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('role', data.user.role);
-      localStorage.setItem('user', JSON.stringify(data.user));
+                localStorage.clear();
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('role', data.user.role);
+                localStorage.setItem('user', JSON.stringify(data.user));
 
-      const role = data.user.role;
-      if (role === 'admin') {
-        navigate('/admin');
-      } else if (role === 'user') {
-        navigate('/dashboard');
-      } else {
-        navigate('/');
-      }
-    } catch (error) {
-      console.error('Google Login Error:', error);
-      alert(error.response?.data?.error || error.message || 'Google login failed');
-    }
-  }}
-  onError={() => {
-    console.log('Google Login Failed');
-  }}
-/>
-
-    </div>
+                redirectByRole(data.user.role);
+              } catch (error) {
+                console.error('Google Login Error:', error);
+                alert(error.response?.data?.error || error.message || 'Google login failed');
+              }
+            }}
+            onError={() => {
+              console.log('Google Login Failed');
+            }}
+          />
+        </div>
 
         <p className="mt-4 text-center text-sm text-gray-700">
           Don&apos;t have an account?{' '}
