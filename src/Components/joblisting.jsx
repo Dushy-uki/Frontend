@@ -99,7 +99,7 @@ const JobListingPage = () => {
 
         <div className="px-8 py-9">
           <motion.div 
-            className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-8 rounded-xl shadow mb-10"
+            className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white p-8 rounded-xl shadow mb-10"
             initial={{ opacity: 0, y: -30 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.8 }}
@@ -122,23 +122,23 @@ const JobListingPage = () => {
           >
             <div className="bg-white p-4 rounded-xl shadow text-center">
               <FaSuitcase className="text-2xl text-indigo-600 mx-auto mb-2" />
-              <h4 className="text-xl font-bold">{jobs.length}</h4>
               <p className="text-gray-600">Total Jobs</p>
+              <h4 className="text-xl font-bold">{jobs.length}</h4>
             </div>
             <div className="bg-white p-4 rounded-xl shadow text-center">
               <FaGlobe className="text-2xl text-green-600 mx-auto mb-2" />
-              <h4 className="text-xl font-bold">{jobs.filter(j => j.remote).length}</h4>
               <p className="text-gray-600">Remote Jobs</p>
+              <h4 className="text-xl font-bold">{jobs.filter(j => j.remote).length}</h4>
             </div>
             <div className="bg-white p-4 rounded-xl shadow text-center">
               <FaBuilding className="text-2xl text-yellow-600 mx-auto mb-2" />
-              <h4 className="text-xl font-bold">{new Set(jobs.map(j => j.company)).size}</h4>
               <p className="text-gray-600">Companies</p>
+              <h4 className="text-xl font-bold">{new Set(jobs.map(j => j.company)).size}</h4>
             </div>
             <div className="bg-white p-4 rounded-xl shadow text-center">
               <FaClock className="text-2xl text-pink-500 mx-auto mb-2" />
-              <h4 className="text-xl font-bold">{jobs.filter(j => j.newThisWeek).length}</h4>
               <p className="text-gray-600">New This Week</p>
+              <h4 className="text-xl font-bold">{jobs.filter(j => j.newThisWeek).length}</h4>
             </div>
           </motion.div>
 
@@ -154,19 +154,19 @@ const JobListingPage = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5 }}
               >
-                <h4 className="text-lg font-bold">{job.title}</h4>
+                <h4 className="text-xl font-bold">{job.title}</h4>
                 <p className="text-sm text-gray-700 font-medium">{job.company || job.postedBy?.name}</p>
                 <div className="flex flex-wrap gap-2 text-xs">
-                  {job.urgent && <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full">Urgent</span>}
+                  {/* {job.urgent && <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full">Urgent</span>}
                   <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-full">{job.type}</span>
                   {job.tags?.map((tag, idx) => (
                     <span key={idx} className="bg-purple-100 text-purple-600 px-2 py-1 rounded-full">{tag}</span>
-                  ))}
+                  ))} */}
                 </div>
                 <div className="text-lg text-gray-600 space-y-1">
-                  <div>📍 {job.location}</div>
-                  <div>💰 ₹{job.salary || 'N/A'}</div>
-                  <div>🕒 {job.experience}+ years • {job.postedDate || '2 days ago'}</div>
+                  <div> {job.location}</div>
+                  <div>{job.salary || 'N/A'}</div>
+                  <div> {job.experience}+ years • {job.postedDate || '2 days ago'}</div>
                 </div>
                 <p className="text-sm text-gray-700">{job.description?.slice(0, 100)}...</p>
                 <div className="flex flex-wrap gap-2">

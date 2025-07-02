@@ -68,7 +68,7 @@ const ApplyJob = () => {
         toast.success('Applied successfully!');
         navigate('/applications');
       } else {
-        alert(data.error || 'Failed to apply');
+        toast.error(data.error || 'Failed to apply');
       }
     } catch (err) {
       console.error(err);

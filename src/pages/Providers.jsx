@@ -107,33 +107,33 @@ const ProviderProfile = () => {
         {/* Dashboard Overview */}
         <section className="p-8 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <motion.div whileHover={{ scale: 1.05 }} className="bg-gradient-to-br from-blue-100 to-blue-300 shadow rounded-lg p-5">
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-gradient-to-br bg-[#E4ED73] shadow rounded-lg p-5">
               <div className="flex items-center gap-3">
                 <div>
-                  <h4 className="text-lg text-gray-700">Total Jobs Posted</h4>
+                  <h4 className="text-lg text-blue-700">Total Jobs Posted</h4>
                   <p className="text-3xl font-bold text-blue-800">{jobs.length}</p>
                 </div>
                 <FaBriefcase className="text-blue-700 text-5xl ml-55" />
               </div>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} className="bg-gradient-to-br from-green-100 to-green-300 shadow rounded-lg p-5">
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-gradient-to-br bg-[#E4ED70] shadow rounded-lg p-5">
               <div className="flex items-center gap-3">
                 <div>
-                  <h4 className="text-lg text-gray-700">Total Applications</h4>
-                  <p className="text-3xl font-bold text-green-700">{totalApplications}</p>
+                  <h4 className="text-lg text-blue-700">Total Applications</h4>
+                  <p className="text-3xl font-bold text-blue-700">{totalApplications}</p>
                    </div>
-                <FaUsers className="text-green-700 text-5xl ml-55" />
+                <FaUsers className="text-blue-700 text-5xl ml-55" />
               </div>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} className="bg-gradient-to-br from-purple-100 to-purple-300 shadow rounded-lg p-5">
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-gradient-to-br bg-[#E4ED65] shadow rounded-lg p-5">
               <div className="flex items-center gap-3">
                 <div>
-                  <h4 className="text-lg text-gray-700">Average Applications</h4>
-                  <p className="text-3xl font-bold text-purple-700">{avgApplications}</p>
+                  <h4 className="text-lg text-blue-700">Average Applications</h4>
+                  <p className="text-3xl font-bold text-blue-700">{avgApplications}</p>
                 </div>
-                <FaListUl className="text-purple-700 text-4xl ml-55" />
+                <FaListUl className="text-blue-700 text-4xl ml-55" />
               </div>
             </motion.div>
           </div>

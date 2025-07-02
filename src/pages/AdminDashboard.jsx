@@ -117,18 +117,18 @@ const AdminDashboard = () => {
           {loading ? (
             <p className="text-center text-gray-600">Loading stats...</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 border-b pb-8">
+              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center border-t-2 border-blue-500">
                 <FaBriefcase className="text-4xl mx-auto mb-2 text-[#094DB1]" />
                 <h4 className="text-lg font-semibold text-gray-800">Active Job Postings</h4>
                 <p className="text-3xl mt-2 text-black">{stats.totalJobs}</p>
               </div>
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center">
+              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center border-t-2 border-blue-500">
                 <FaUserGraduate className="text-4xl mx-auto mb-2 text-[#094DB1]" />
                 <h4 className="text-lg font-semibold text-gray-800">Total Applicants</h4>
                 <p className="text-3xl mt-2 text-black">{stats.totalApplications}</p>
               </div>
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center">
+              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center border-t-2 border-blue-500 ">
                 <FaUsers className="text-4xl mx-auto mb-2 text-[#094DB1]" />
                 <h4 className="text-lg font-semibold text-gray-800">Total Users</h4>
                 <p className="text-3xl mt-2 text-black">{stats.totalUsers}</p>
@@ -139,7 +139,7 @@ const AdminDashboard = () => {
 
         {/* Chart */}
         {!loading && (
-          <div className="mx-auto mb-12" style={{ width: '90%', height: 300 }}>
+          <div className="mx-auto mb-12" style={{ width: '80%', height: 300 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={data}
