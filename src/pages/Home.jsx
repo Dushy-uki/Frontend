@@ -89,18 +89,18 @@ function App() {
 </section>
 
       {/* Features Section */}
-      <section className="bg-white text-center py-20 px-4">
+      <section className="bg-white text-center py-20 px-4 h-150">
         <h2 className="text-4xl font-bold mb-2">Find the Best Part-Time Jobs Hiring Now</h2>
         <p className="text-gray-600 mb-12">Discover opportunities tailored for students and professionals</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-          <div className="bg-white border shadow-lg rounded-xl p-6" data-aos="fade-up">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto ">
+          <div className="bg-white mt-6 border shadow-lg rounded-xl p-6" data-aos="fade-up">
             <img src={p1} className="w-16 mx-auto mb-4" alt="job icon" />
             <h3 className="text-xl font-semibold">Find Opportunities</h3>
             <p className="text-gray-500 mt-2">
               Browse diverse part-time jobs tailored for students and professionals.
             </p>
           </div>
-          <div className="bg-white border shadow-lg rounded-xl p-6" data-aos="fade-up" data-aos-delay="200">
+          <div className="bg-white border mt-6 shadow-lg rounded-xl p-6" data-aos="fade-up" data-aos-delay="200">
             <img src={p2} className="w-16 mx-auto mb-4" alt="resume icon" />
             <h3 className="text-xl font-semibold">AI-Powered Resume</h3>
             <p className="text-gray-500 mt-2">
@@ -111,16 +111,16 @@ function App() {
       </section>
 
       {/* CTA Section with Blurred Background */}
-<section className="relative text-white text-center py-24 px-6 overflow-hidden">
+<section className="relative text-white text-center h-120 py-35 px-6 overflow-hidden">
   {/* Blurred Background Image */}
   <div
-    className="absolute inset-0 bg-cover bg-center scale-105 blur-[4px] brightness-[0.3] z-0"
+    className="absolute inset-0 bg-cover bg-center scale-105 blur-[4px] brightness-[0.3] z-0 rounded-xl"
     style={{ backgroundImage: `url(${bg2})` }}
   ></div>
 
   {/* Foreground Content */}
-  <div className="relative z-10 max-w-3xl mx-auto">
-    <h2 className="text-4xl md:text-4xl font-bold mb-6 drop-shadow-lg">
+  <div className="relative z-10 max-w-5xl mx-auto ">
+    <h2 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">
       <span className="text-cyan-400">Millions</span> of professionals are already using Time Pro.
     </h2>
     <p className="text-lg text-gray-200 mb-8 drop-shadow-md">
@@ -137,57 +137,59 @@ function App() {
     </Link>
   </div>
 </section>
-<footer className="bg-black text-white px-6 py-12">
-  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+<footer className="bg-white text-black px-6 py-12 border-t border-black">
+  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 text-lg ">
     
-    {/* Time Pro Info */}
+    {/* Column 1: Time Pro Info */}
     <div>
-      <h2 className="text-2xl font-bold">
-        <span className="text-cyan-400">Time</span>Pro
-      </h2>
-      <p className="text-sm mt-4 text-gray-300">
-        Find remote jobs, build your profile, and connect with top employers. Time Pro helps you shape your career from anywhere.
+      <h2 className="text-cyan-400 text-lg font-bold mb-2 ml-5">Time Pro</h2>
+      <p className="text-black-500 ml-5">
+        Connecting talented professionals with amazing part-time opportunities worldwide.
       </p>
-      <div className="flex gap-4 mt-4 text-xl">
-        <span className="bg-white text-black p-2 rounded-full">&#x1F426;</span>
-        <span className="bg-white text-black p-2 rounded-full">&#127909;</span>
-        <span className="bg-white text-black p-2 rounded-full">&#128101;</span>
-      </div>
-      <p className="mt-4 font-semibold text-sm">Time Pro © {new Date().getFullYear()}</p>
     </div>
 
-    {/* Address */}
+    {/* Column 2: Quick Links */}
     <div>
-      <h3 className="text-lg font-bold mb-2">Address</h3>
-      <p className="text-sm text-gray-300">📍 456 Tech Street, Chennai, India</p>
-      <p className="text-sm mt-2">📞 +91 98765 43210</p>
-      <p className="text-sm">📧 support@timepro.com</p>
+      <h3 className="text-cyan-400 font-bold mb-2 ml-19">Quick Links</h3>
+      <ul className="space-y-1 text-black ml-19">
+        <li><a href="#">Find Jobs</a></li>
+        <li><a href="#">Post a Job</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
     </div>
 
-    {/* Newsletter */}
-    <div className="md:col-span-2">
-      <h3 className="text-lg font-bold mb-2 ml-30">Newsletter</h3>
-      <p className="text-sm text-gray-300 mb-3">Join our mailing list for job updates</p>
-      <div className="flex max-w-md">
-        <input
-          type="email"
-          placeholder="Your email"
-          className="px-4 py-2 text-black w-full rounded-l-md border border-gray-400 focus:outline-none"
-        />
-        <button className="bg-orange-500 text-white px-5 py-2 rounded-r-md hover:bg-orange-600">
-          Signup
-        </button>
-      </div>
+    {/* Column 3: Support */}
+    <div>
+      <h3 className="text-cyan-400 font-bold mb-2 ml-14">Support</h3>
+      <ul className="space-y-1 text-black ml-14">
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    {/* Column 4: Connect */}
+    <div>
+      <h3 className="text-cyan-400 font-bold mb-2 ml-14">Connect</h3>
+      <ul className="space-y-1 text-black ml-14">
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
     </div>
   </div>
 
-  {/* Bottom Note */}
-  <div className="text-center text-gray-400 text-sm mt-10">
-    Built with ❤️ by Time Pro Team
-  </div>
+  {/* Divider */}
+  <hr className="my-8 border-gray-600" />
+
+  {/* Bottom Text */}
+  <p className="text-center text-black text-sm ">
+    &copy; {new Date().getFullYear()} Time Pro. All rights reserved.
+  </p>
 </footer>
-
-
 
     </div>
   );
