@@ -79,26 +79,26 @@ const ApplyJob = () => {
   return (
     <div className="flex min-h-screen bg-gray-100 font-sans">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-              <nav className="flex flex-col space-y-4 mt-10 text-md">
-                <Link to="/dashboard" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+      <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+              <h2 className="text-2xl font-bold mb-6">Time Pro</h2>
+              <nav className="flex flex-col space-y-5 text-lg">
+                <Link to="/dashboard" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
                   <FaHome /> Dashboard
                 </Link>
-                <Link to="/jobs" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                <Link to="/jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
                   <FaBriefcase /> Job Listing
                 </Link>
-                <Link to="/applications" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
-                  <FaClipboardList /> My Application
+                <Link to="/applications" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
+                  <FaClipboardList /> My Applications
                 </Link>
-                <Link to="/resume" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                <Link to="/resume" className="flex items-center gap-3 bg-cyan-800 px-4 py-2 rounded font-semibold">
                   <FaFileAlt /> My Resume
                 </Link>
-                <Link to="/edit-profile" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition">
+                <Link to="/edit-profile" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
                   <FaUserEdit /> Edit Profile
                 </Link>
               </nav>
             </aside>
-
       {/* Main */}
       <main className="flex-1">
         {/* Header */}
@@ -109,7 +109,7 @@ const ApplyJob = () => {
           </div>
           <Link
             to="/login"
-            className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition"
+            className="bg-cyan-600 text-black px-5 py-2 rounded-full hover:bg-cyan-800 transition"
           >
             Login
           </Link>
@@ -168,7 +168,7 @@ const ApplyJob = () => {
 
             <button
               type="submit"
-              className="bg-[#094DB1] text-white px-6 py-2 rounded-full hover:bg-blue-800 transition"
+              className="bg-cyan-800 text-white px-6 py-2 rounded-full hover:bg-cyan-700 transition"
             >
               Submit Application
             </button>

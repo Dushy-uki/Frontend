@@ -7,7 +7,6 @@ import {
   FaPlusCircle,
   FaUserCircle,
   FaTrash,
-  FaEdit,
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
@@ -56,31 +55,33 @@ const PostedJobs = () => {
 
   return (
     <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-purple-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white p-6 sticky top-0 min-h-screen shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 animate-pulse">Time Pro</h2>
-        <nav className="flex flex-col space-y-5 text-md">
-          <Link to="/provider" className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded text-white font-semibold hover:bg-white/20">
-            <FaUserCircle /> Profile Overview
-          </Link>
-          <Link to="/post-job" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
-            <FaPlusCircle /> Post New Job
-          </Link>
-          <Link to="/provider/posted-jobs" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
-            <FaBriefcase /> Manage Jobs
-          </Link>
-        </nav>
-      </aside>
-
+       {/* Sidebar */}
+            <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+              <h2 className="text-2xl font-bold mb-6">Time Pro</h2>
+              <nav className="flex flex-col space-y-5 text-md">
+                <Link to="/provider" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded font-semibold">
+                  <FaUserCircle /> Profile Overview
+                </Link>
+                <Link to="/post-job" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition">
+                  <FaPlusCircle /> Post New Job
+                </Link>
+                <Link to="/provider/posted-jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition">
+                  <FaBriefcase /> Manage Jobs
+                </Link>
+              </nav>
+            </aside>
       {/* Main */}
       <main className="flex-1">
         {/* Header */}
         <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-10" />
-            <h2 className="text-2xl font-bold text-[#1F1F1F]">Posted Jobs</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Your Posted Jobs</h2>
           </div>
-          <Link to="/login" className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition">
+          <Link
+            to="/login"
+            className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-600 transition"
+          >
             Logout
           </Link>
         </header>
@@ -88,7 +89,7 @@ const PostedJobs = () => {
         {/* Job Cards */}
         <section className="p-10">
           {loading ? (
-            <p>Loading posted jobs...</p>
+            <p className="text-gray-500">Loading posted jobs...</p>
           ) : jobs.length === 0 ? (
             <p className="text-gray-500">You haven't posted any jobs yet.</p>
           ) : (
@@ -97,19 +98,19 @@ const PostedJobs = () => {
                 <motion.div
                   key={job._id}
                   whileHover={{ scale: 1.03 }}
-                  className="bg-gradient-to-br from-white via-gray-50 to-blue-50 rounded-xl shadow-md p-8 transition border-1 border-black-300"
+                  className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-cyan-800 transition"
                 >
-                  <h4 className="text-2xl font-bold text-[#094DB1] mb-1">{job.title}</h4>
+                  <h4 className="text-xl font-bold text-cyan-800 mb-1">{job.title}</h4>
                   <p className="text-gray-700 font-medium">{job.companyName}</p>
-                  <p className="text-lg text-gray-500">{job.location}</p>
-                  <p className="text-lg font-medium mt-1">Salary: {job.salary}</p>
+                  <p className="text-gray-600">{job.location}</p>
+                  <p className="text-sm text-gray-500 mt-1">Salary: {job.salary || 'N/A'}</p>
 
                   <div className="mt-4 flex justify-between items-center text-sm">
                     <Link
                       to={`/job/${job._id}/applications`}
                       className="text-blue-600 hover:underline flex items-center gap-1"
                     >
-                      <FaClipboardList /> Applications
+                      <FaClipboardList /> View Applications
                     </Link>
                     <button
                       onClick={() => handleDelete(job._id)}
@@ -123,6 +124,12 @@ const PostedJobs = () => {
             </div>
           )}
         </section>
+
+        {/* Footer */}
+        <footer className="bg-white py-4 text-center text-sm text-gray-500 border-t mt-116">
+          <img src={logo} alt="Time Pro Logo" className="h-6 mx-auto mb-2" />
+          <p>© 2025 Time Pro • Empowering careers one job at a time.</p>
+        </footer>
       </main>
     </div>
   );

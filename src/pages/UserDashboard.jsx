@@ -35,24 +35,30 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-purple-100">
+    <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 animate-fade-in">
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white p-6 sticky top-0 min-h-screen shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 animate-pulse">Time Pro</h2>
-        <nav className="flex flex-col space-y-5 text-md">
-          <Link to="/dashboard" className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded text-white font-semibold hover:bg-white/20">
+      <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+        <motion.h2
+          className="text-2xl font-bold mb-6 text-white"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          Time Pro
+        </motion.h2>
+        <nav className="flex flex-col space-y-5 text-lg">
+          <Link to="/dashboard" className="flex items-center gap-3 bg-cyan-800 px-4 py-2 rounded font-semibold hover:bg-cyan-400 transition-all duration-300">
             <FaHome /> Dashboard
           </Link>
-          <Link to="/jobs" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
+          <Link to="/jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all duration-300">
             <FaBriefcase /> Job Listing
           </Link>
-          <Link to="/applications" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
+          <Link to="/applications" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all duration-300">
             <FaClipboardList /> My Applications
           </Link>
-          <Link to="/resume" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
+          <Link to="/resume" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all duration-300">
             <FaFileAlt /> My Resume
           </Link>
-          <Link to="/edit-profile" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
+          <Link to="/edit-profile" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all duration-300">
             <FaUserEdit /> Edit Profile
           </Link>
         </nav>
@@ -61,82 +67,101 @@ const UserDashboard = () => {
       {/* Main Content */}
       <main className="flex-1">
         {/* Header */}
-        <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
+        <motion.header
+          className="bg-white shadow px-8 py-4 flex justify-between items-center"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-10" />
             <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
           </div>
-          <Link to="/login" className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 hover:text-white transition">
+          <Link to="/login" className="bg-[#0e4245] text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition">
             Login
           </Link>
-        </header>
+        </motion.header>
 
         {/* Welcome Card */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white/70 backdrop-blur-sm mx-6 mt-8 p-6 rounded-xl flex items-center shadow-lg border-2 border-blue-500"
+          className="bg-white/90 backdrop-blur-sm mx-6 mt-8 p-6 rounded-xl flex items-center shadow-lg border-2 border-[#0e4245]"
         >
           <div className="py-3 px-6">
-            <img
+            <motion.img
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
               src={getValidAvatarUrl(user.avatar)}
               alt="Avatar"
-              className="w-28 h-28 rounded-full object-cover shadow-md ring-2 ring-white"
+              className="w-28 h-28 rounded-full object-cover shadow-md ring-2 ring-cyan-600"
             />
           </div>
           <div className="px-8 mt-2">
-            <h2 className="text-3xl font-bold text-[#094DB1]">Welcome {user.name || 'User'}!</h2>
+            <h2 className="text-3xl font-bold text-[#0e4245]">
+              Welcome {user.name || 'User'}!
+            </h2>
             <p className="text-sm text-gray-600 mt-1">{user.email}</p>
             <p className="text-md text-gray-700 mt-2">
               Here's your job dashboard. Let's find your next opportunity.
             </p>
-            {user.skills && <p className="text-sm text-gray-600 mt-1">Skills: {user.skills}</p>}
-            {user.bio && <p className="text-sm text-gray-600">Bio: {user.bio}</p>}
+            {user.skills && (
+              <p className="text-sm text-gray-700 mt-2">
+                <span className="font-semibold text-cyan-500">Skills:</span> {user.skills}
+              </p>
+            )}
+            {user.bio && (
+              <p className="text-sm text-gray-700 mt-1">
+                <span className="font-semibold text-cyan-500">Bio:</span> {user.bio}
+              </p>
+            )}
           </div>
         </motion.div>
 
         {/* Quick Actions */}
         <section className="mx-8 mt-10">
-          <h3 className="text-2xl font-bold mb-4 py-3 text-[#1F1F1F]">Quick Actions</h3>
+          <motion.h3
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-3xl font-bold mb-4 py-3 text-[#1F1F1F]"
+          >
+            Quick Actions
+          </motion.h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="bg-white p-7 rounded-xl shadow hover:shadow-xl text-center transition border-2 border-blue-500"
-            >
-              <img src={searching} alt="Browse Jobs" className="h-20 mx-auto mb-4" />
-              <h4 className="font-semibold text-lg text-gray-800">Browse Jobs</h4>
-              <Link to="/jobs" className="text-blue-600 hover:underline text-sm">Go to Browse Jobs</Link>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="bg-white p-7 rounded-xl shadow hover:shadow-xl text-center transition border-2 border-blue-500"
-            >
-              <img src={resume} alt="Applications" className="h-16 mx-auto mb-4" />
-              <h4 className="font-semibold text-lg text-gray-800">My Applications</h4>
-              <Link to="/applications" className="text-blue-600 hover:underline text-sm">Go to Applications</Link>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="bg-white p-7 rounded-xl shadow hover:shadow-xl text-center transition border-2 border-blue-500"
-            >
-              <img src={cv} alt="Resume" className="h-16 mx-auto mb-4" />
-              <h4 className="font-semibold text-lg text-gray-800">Update Resume</h4>
-              <Link to="/resume" className="text-blue-600 hover:underline text-sm">Go to Resume</Link>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Recent Activity */}
-        <section className="mx-8 mt-10 mb-10 py-8">
-          <h3 className="text-2xl font-bold mb-4 text-[#1F1F1F]">Recent Activity</h3>
-          <div className="bg-gray-200 p-8 rounded-xl text-center text-gray-700 shadow">
-            No recent activity to display. Apply for jobs or update your resume to see activity here.
+            {[{
+              title: 'Browse Jobs',
+              img: searching,
+              link: '/jobs'
+            }, {
+              title: 'My Applications',
+              img: resume,
+              link: '/applications'
+            }, {
+              title: 'Update Resume',
+              img: cv,
+              link: '/resume'
+            }].map(({ title, img, link }, index) => (
+              <motion.div
+                key={title}
+                whileHover={{ scale: 1.05 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index }}
+                className="bg-white p-7 rounded-xl shadow hover:shadow-xl text-center transition border-2 border-[#0e4245]"
+              >
+                <img src={img} alt={title} className="h-20 mx-auto mb-4" />
+                <h4 className="font-semibold text-lg text-gray-800">{title}</h4>
+                <Link to={link} className="text-cyan-600 hover:underline text-sm">Go to {title}</Link>
+              </motion.div>
+            ))}
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="bg-white py-4 text-center text-sm text-gray-500 border-t">
+        <footer className="bg-white py-4 text-center text-sm text-gray-500 border-t mt-50">
           <img src={logo} alt="Time Pro Logo" className="h-6 mx-auto mb-2" />
           <p>© 2025 Time Pro • Find your future job today.</p>
         </footer>

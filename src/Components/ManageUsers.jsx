@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import { FaBriefcase, FaUserGraduate, FaUsers } from 'react-icons/fa';
 
-
-const USERS_PER_PAGE = 15;
+const USERS_PER_PAGE = 12;
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -52,11 +51,9 @@ const ManageUsers = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      await axios.put(
-        `http://localhost:5000/api/admin/${editUserId}`,
-        editFormData,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await axios.put(`http://localhost:5000/api/admin/${editUserId}`, editFormData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setEditUserId(null);
       fetchUsers();
     } catch (error) {
@@ -84,80 +81,43 @@ const ManageUsers = () => {
     }
   };
 
-  // Pagination logic
   const indexOfLastUser = currentPage * USERS_PER_PAGE;
   const indexOfFirstUser = indexOfLastUser - USERS_PER_PAGE;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(users.length / USERS_PER_PAGE);
 
   return (
-    <div className="flex min-h-screen font-sans">
-      {/* Sidebar */}
-      <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-        <nav className="flex flex-col mt-10 space-y-5 text-md">
-          <Link
-            to="/admin"
-            className="text-xl font-bold text-white mb-4 border-b border-white pb-2"
-          >
-            Admin Dashboard
-          </Link>
-      
-          <Link
-            to="/admin/manage-jobs"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaBriefcase className="text-lg" />
-            <span>Manage Jobs</span>
-          </Link>
-      
-          <Link
-            to="/admin/user"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaUserGraduate className="text-lg" />
-            <span>Manage Users</span>
-          </Link>
-      
-          <Link
-            to="/admin/payment"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaUsers className="text-lg" />
-            <span>Payments</span>
-          </Link>
+    <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-blue-100">
+      <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+        <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
+        <nav className="flex flex-col space-y-5 text-lg">
+          <Link to="/admin" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded font-semibold">Dashboard</Link>
+          <Link to="/admin/manage-jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaBriefcase /> Manage Jobs</Link>
+          <Link to="/admin/user" className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded font-semibold"><FaUserGraduate /> Manage Users</Link>
+          <Link to="/admin/payment" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaUsers /> Payments</Link>
         </nav>
       </aside>
-      
 
-      {/* Main Content */}
-      <main className="flex-1 bg-gray-50">
-        {/* Header */}
-        <header className="flex justify-between items-center bg-white shadow px-8 py-4">
+      <main className="flex-1">
+        <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <img src={logo} alt="Time Pro Logo" className="h-13" />
-            <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
+            <img src={logo} alt="Time Pro Logo" className="h-12" />
+            <h3 className="text-2xl font-bold text-gray-800">Time Pro</h3>
           </div>
-          <Link
-            to="/login"
-            className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition"
-          >
-            Login
-          </Link>
+          <Link to="/login" className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition">Login</Link>
         </header>
 
-        {/* Content */}
         <section className="p-8">
-          <h2 className="text-3xl font-bold mb-6">Manage Users</h2>
-
-          <div className="overflow-x-auto shadow rounded-lg border border-gray-200">
-            <table className="min-w-full bg-white">
-              <thead>
-                <tr className="bg-[#094DB1] text-white text-left">
-                  <th className="py-3 px-6">Name</th>
-                  <th className="py-3 px-6">Email</th>
-                  <th className="py-3 px-6">Role</th>
-                  <th className="py-3 px-6">Joined</th>
-                  <th className="py-3 px-6">Actions</th>
+          <h2 className="text-3xl font-bold mb-6 text-cyan-800">Manage Users</h2>
+          <div className="overflow-x-auto shadow rounded-lg border border-gray-200 bg-white">
+            <table className="min-w-full">
+              <thead className="bg-cyan-800 text-white">
+                <tr>
+                  <th className="py-3 px-6 text-left">Name</th>
+                  <th className="py-3 px-6 text-left">Email</th>
+                  <th className="py-3 px-6 text-left">Role</th>
+                  <th className="py-3 px-6 text-left">Joined</th>
+                  <th className="py-3 px-6 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -168,32 +128,15 @@ const ManageUsers = () => {
                 ) : (
                   currentUsers.map((user) =>
                     editUserId === user._id ? (
-                      <tr key={user._id} className="border-b bg-yellow-50">
+                      <tr key={user._id} className="bg-yellow-50 border-b">
                         <td className="py-3 px-6">
-                          <input
-                            type="text"
-                            name="name"
-                            value={editFormData.name}
-                            onChange={handleEditChange}
-                            className="border p-1 rounded w-full"
-                          />
+                          <input name="name" value={editFormData.name} onChange={handleEditChange} className="border p-1 rounded w-full" />
                         </td>
                         <td className="py-3 px-6">
-                          <input
-                            type="email"
-                            name="email"
-                            value={editFormData.email}
-                            onChange={handleEditChange}
-                            className="border p-1 rounded w-full"
-                          />
+                          <input name="email" value={editFormData.email} onChange={handleEditChange} className="border p-1 rounded w-full" />
                         </td>
                         <td className="py-3 px-6">
-                          <select
-                            name="role"
-                            value={editFormData.role}
-                            onChange={handleEditChange}
-                            className="border p-1 rounded w-full"
-                          >
+                          <select name="role" value={editFormData.role} onChange={handleEditChange} className="border p-1 rounded w-full">
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                             <option value="partner">Partner</option>
@@ -201,41 +144,19 @@ const ManageUsers = () => {
                         </td>
                         <td className="py-3 px-6">{new Date(user.createdAt).toLocaleDateString()}</td>
                         <td className="py-3 px-6 space-x-2">
-                          <button
-                            onClick={handleEditSubmit}
-                            disabled={loading}
-                            className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
-                          >
-                            Save
-                          </button>
-                          <button
-                            onClick={handleCancel}
-                            disabled={loading}
-                            className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
-                          >
-                            Cancel
-                          </button>
+                          <button onClick={handleEditSubmit} disabled={loading} className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Save</button>
+                          <button onClick={handleCancel} disabled={loading} className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500">Cancel</button>
                         </td>
                       </tr>
                     ) : (
-                      <tr key={user._id} className="border-b hover:bg-gray-100">
+                      <tr key={user._id} className="hover:bg-gray-100 border-b">
                         <td className="py-3 px-6">{user.name}</td>
                         <td className="py-3 px-6">{user.email}</td>
                         <td className="py-3 px-6">{user.role}</td>
                         <td className="py-3 px-6">{new Date(user.createdAt).toLocaleDateString()}</td>
                         <td className="py-3 px-6 space-x-2">
-                          <button
-                            onClick={() => handleEditClick(user)}
-                            className="bg-[#E4ED73] text-black px-3 py-1 rounded hover:bg-yellow-500"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => handleDelete(user._id)}
-                            className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-                          >
-                            Delete
-                          </button>
+                          <button onClick={() => handleEditClick(user)} className="bg-[#E4ED73] text-black px-3 py-1 rounded hover:bg-yellow-500">Edit</button>
+                          <button onClick={() => handleDelete(user._id)} className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
                         </td>
                       </tr>
                     )
@@ -245,34 +166,13 @@ const ManageUsers = () => {
             </table>
           </div>
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex justify-center mt-6 space-x-2">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-              >
-                Prev
-              </button>
+              <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">Prev</button>
               {[...Array(totalPages)].map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentPage(i + 1)}
-                  className={`px-4 py-2 rounded ${
-                    currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                  }`}
-                >
-                  {i + 1}
-                </button>
+                <button key={i} onClick={() => setCurrentPage(i + 1)} className={`px-4 py-2 rounded ${currentPage === i + 1 ? 'bg-cyan-800 text-white' : 'bg-gray-200'}`}>{i + 1}</button>
               ))}
-              <button
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-              >
-                Next
-              </button>
+              <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">Next</button>
             </div>
           )}
         </section>

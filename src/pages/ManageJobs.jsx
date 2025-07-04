@@ -4,7 +4,6 @@ import axios from 'axios';
 import logo from '../assets/logo.png';
 import { FaBriefcase, FaUserGraduate, FaUsers } from 'react-icons/fa';
 
-
 const ManageJobs = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [allJobs, setAllJobs] = useState([]);
@@ -35,95 +34,74 @@ const ManageJobs = () => {
   }, [searchTerm, allJobs]);
 
   return (
-    <div className="flex min-h-screen font-sans">
+    <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-blue-100">
       {/* Sidebar */}
-     <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-  <nav className="flex flex-col mt-10 space-y-5 text-md">
-    <Link
-      to="/admin"
-      className="text-xl font-bold text-white mb-4 border-b border-white pb-2"
-    >
-      Admin Dashboard
-    </Link>
-
-    <Link
-      to="/admin/manage-jobs"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaBriefcase className="text-lg" />
-      <span>Manage Jobs</span>
-    </Link>
-
-    <Link
-      to="/admin/user"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaUserGraduate className="text-lg" />
-      <span>Manage Users</span>
-    </Link>
-
-    <Link
-      to="/admin/payment"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaUsers className="text-lg" />
-      <span>Payments</span>
-    </Link>
-  </nav>
-</aside>
-
+      {/* Sidebar */}
+           <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+             <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
+             <nav className="flex flex-col space-y-5 text-lg">
+               <Link to="/admin" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded font-semibold">
+                 Dashboard
+               </Link>
+               <Link to="/admin/manage-jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
+                 <FaBriefcase /> Manage Jobs
+               </Link>
+               <Link to="/admin/user" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
+                 <FaUserGraduate /> Manage Users
+               </Link>
+               <Link to="/admin/payment" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
+                 <FaUsers /> Payments
+               </Link>
+             </nav>
+           </aside>
 
       {/* Main Content */}
-      <main className="flex-1 bg-gray-50">
+      <main className="flex-1">
         {/* Header */}
-        <div className="flex justify-between items-center bg-white shadow px-8 py-4">
+        <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <img src={logo} alt="Time Pro Logo" className="h-13" />
-            <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
+            <img src={logo} alt="Time Pro Logo" className="h-10" />
+            <h3 className="text-2xl font-bold text-gray-800">Time Pro Admin</h3>
           </div>
-          <Link
-            to="/login"
-            className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition"
-          >
-            Login
+          <Link to="/login" className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition">
+           Login
           </Link>
-        </div>
+        </header>
 
-        {/* Content */}
-        <div className="p-8">
-          <h2 className="text-3xl font-bold mb-2">Manage Job Postings</h2>
-          <p className="mb-6 text-gray-700">Oversee all job listings, view applicants, and manage their status.</p>
+        {/* Page Title */}
+        <section className="px-8 pt-10">
+          <h2 className="text-3xl font-bold text-cyan-800 mb-1">Manage Job Postings</h2>
+          <p className="text-gray-600 mb-6">Search, view, and manage all job listings on the platform.</p>
 
-          {/* Search and Post */}
-          <div className="p-4 rounded-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          {/* Search */}
+          <div className="mb-6">
             <input
               type="text"
-              placeholder="Search jobs"
+              placeholder="Search jobs..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="p-3 rounded-lg w-full md:w-1/2 border border-gray-300 focus:outline-blue-500"
+              className="w-full md:w-1/2 p-3 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-[#094DB1]"
             />
-            
           </div>
+        </section>
 
-          {/* Job Cards */}
-          <h3 className="text-xl font-semibold mb-4">Job Posting(s)</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Job Cards */}
+        <section className="px-8 pb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredJobs.length === 0 ? (
-              <p className="col-span-full text-gray-600">No jobs found.</p>
+              <p className="col-span-full text-center text-gray-500">No jobs found.</p>
             ) : (
               filteredJobs.map((job) => (
-                <div key={job._id} className="bg-gray-200 rounded-xl p-4 space-y-2">
-                  <h4 className="font-semibold text-xl">{job.title}</h4>
-                  <p className="text-lg text-gray-800">{job.company}</p>
-                  <p className="text-lg text-gray-800">{job.location}</p>
-                  <p className="text-lg">Description: {job.description}</p>
-                  <p className="text-lg">Salary: {job.salary}</p>
-                  <p className="text-lg">Posted: {new Date(job.createdAt).toLocaleDateString()}</p>
-                  <p className="text-lg">Applicants: {job.applicants?.length || 0}</p>
+                <div key={job._id} className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition border-t-4 border-cyan-800">
+                  <h4 className="text-xl font-semibold text-gray-800 mb-1">{job.title}</h4>
+                  <p className="text-gray-600">{job.company}</p>
+                  <p className="text-sm text-gray-500 mb-2">{job.location}</p>
+                  <p className="text-gray-700 text-sm mb-1">Salary: ${job.salary}</p>
+                  <p className="text-gray-700 text-sm mb-1">Applicants: {job.applicants?.length || 0}</p>
+                  <p className="text-gray-500 text-sm mb-4">Posted: {new Date(job.createdAt).toLocaleDateString()}</p>
                   <Link
                     to={`/admin/applications/${job._id}`}
-                    className="text-white bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700"
+                    className="inline-block text-center bg-cyan-800 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 transition w-full"
                   >
                     View Applications
                   </Link>
@@ -133,36 +111,36 @@ const ManageJobs = () => {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center mt-6 space-x-2">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-            >
-              Prev
-            </button>
-
-            {[...Array(totalPages)].map((_, i) => (
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-8 space-x-2">
               <button
-                key={i}
-                onClick={() => setCurrentPage(i + 1)}
-                className={`px-4 py-2 rounded ${
-                  currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
               >
-                {i + 1}
+                Prev
               </button>
-            ))}
-
-            <button
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
-        </div>
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-4 py-2 rounded ${
+                    currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </section>
       </main>
     </div>
   );

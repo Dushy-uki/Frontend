@@ -3,7 +3,13 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import { toast } from 'react-toastify';
-import { FaHome, FaBriefcase, FaClipboardList, FaUserEdit, FaFileAlt } from 'react-icons/fa';
+import {
+  FaHome,
+  FaBriefcase,
+  FaClipboardList,
+  FaUserEdit,
+  FaFileAlt
+} from 'react-icons/fa';
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -79,52 +85,53 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-        <nav className="flex flex-col space-y-4 mt-10 text-md">
-          <Link to="/dashboard" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaHome /> Dashboard</Link>
-          <Link to="/jobs" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaBriefcase /> Job Listing</Link>
-          <Link to="/applications" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaClipboardList /> My Application</Link>
-          <Link to="/resume" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaFileAlt /> My Resume</Link>
-          <Link to="/edit-profile" className="flex items-center gap-2 hover:bg-white/10 rounded px-3 py-2 transition"><FaUserEdit /> Edit Profile</Link>
+    <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-blue-100">
+      <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+        <h2 className="text-2xl font-bold mb-6">Time Pro</h2>
+        <nav className="flex flex-col space-y-5 text-lg">
+          <Link to="/dashboard" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaHome /> Dashboard</Link>
+          <Link to="/jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaBriefcase /> Job Listing</Link>
+          <Link to="/applications" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaClipboardList /> My Application</Link>
+          <Link to="/resume" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaFileAlt /> My Resume</Link>
+          <Link to="/edit-profile" className="flex items-center gap-3 bg-cyan-800 px-4 py-2 rounded font-semibold"><FaUserEdit /> Edit Profile</Link>
         </nav>
       </aside>
 
       <div className="flex-1">
-        <header className="flex justify-between items-center bg-white shadow px-8 py-4">
+        <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-12" />
-            <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
+            <h3 className="text-2xl font-bold text-gray-800">Time Pro</h3>
           </div>
-          <Link to="/login" className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition">
+          <Link to="/login" className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition">
             Login
           </Link>
         </header>
 
         <main className="bg-white p-10 rounded-xl shadow-md max-w-3xl mx-auto mt-10">
-          <h2 className="text-3xl font-bold text-black mb-2">Personal Information</h2>
+          <h2 className="text-3xl font-bold text-cyan-800 mb-2">Personal Information</h2>
           <p className="text-gray-600 mb-6">Update your personal details and academic background.</p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex flex-col md:flex-row gap-6">
               <div className="w-full md:w-1/2">
                 <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#094DB1]" required />
+                <input type="text" name="name" value={formData.name} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-600" required />
               </div>
               <div className="w-full md:w-1/2">
                 <label className="block text-sm font-medium text-gray-700">Email Address</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#094DB1]" required />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-600" required />
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700">Skills</label>
-              <input type="text" name="skills" value={formData.skills} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#094DB1]" />
+              <input type="text" name="skills" value={formData.skills} onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-600" />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700">Short Bio (Optional)</label>
-              <textarea name="bio" value={formData.bio} onChange={handleChange} rows={3} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#094DB1]"></textarea>
+              <textarea name="bio" value={formData.bio} onChange={handleChange} rows={3} className="mt-1 w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-600"></textarea>
             </div>
 
             <div>
@@ -133,7 +140,7 @@ const EditProfile = () => {
               {preview && <img src={preview} alt="Preview" className="w-24 h-24 mt-2 rounded-full object-cover" />}
             </div>
 
-            <button type="submit" className="bg-[#094DB1] text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition w-full">Save Changes</button>
+            <button type="submit" className="bg-cyan-800 text-white py-3 px-6 rounded-lg hover:bg-cyan-600 transition w-full">Save Changes</button>
           </form>
         </main>
       </div>

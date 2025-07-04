@@ -19,20 +19,19 @@ function App() {
   return (
     <div className="font-sans">
       {/* Header */}
-      <header className="bg-black text-white flex justify-between items-center px-6 py-4 shadow-lg ">
-        <div className="flex items-center gap-2">
-          <img src={logo} className="w-15 ml-20" alt="logo" />
-          <span className="text-cyan-400 font-bold text-xl">Time Pro</span>
-        </div>
-        <Link
-          to="/login"
-          className="bg-cyan-400 hover:bg-cyan-500 text-black font-bold px-5 py-2 rounded-full shadow-lg"
-        >
-          Login
-        </Link>
-      </header>
+      <nav className="absolute top-0 left-0 w-full bg-white/80 shadow-md py-3 px-8 flex justify-between items-center z-20">
+              <div className="flex items-center gap-2">
+                <img src={logo} alt="Time Pro Logo" className="h-10" />
+                <h2 className="text-xl font-bold text-[#0A4DA2]">Time Pro</h2>
+              </div>
+              <div className="space-x-4">
+                <Link to="/" className="text-[#0A4DA2] font-medium hover:underline">Home</Link>
+                <Link to="/login" className="text-[#0A4DA2] font-medium hover:underline">Login</Link>
+                <Link to="/register" className="bg-[#0A4DA2] text-white px-4 py-1 rounded-full hover:bg-[#094db1] transition">Sign Up</Link>
+              </div>
+            </nav>
 
-<section className="relative h-160 flex flex-col md:flex-row items-center justify-between px-10 py-24 overflow-hidden">
+<section className="relative h-180 flex flex-col md:flex-row items-center justify-between px-10 py-24 overflow-hidden">
   {/* Blurred Background */}
   <div
     className="absolute inset-0 bg-cover bg-center scale-105 blur-[5px] brightness-30 z-0"

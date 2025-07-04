@@ -35,7 +35,6 @@ const PostJob = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { title, companyName, description } = jobData;
     if (!title || !companyName || !description) {
       toast.error('Please fill in all required fields');
@@ -45,11 +44,8 @@ const PostJob = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(`${import.meta.env.VITE_API_URL}/provider/jobs`, jobData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-
       toast.success('Job posted successfully!');
       setJobData({
         title: '',
@@ -59,7 +55,6 @@ const PostJob = () => {
         salary: '',
         skills: '',
       });
-
       navigate('/provider/posted-jobs');
     } catch (err) {
       console.error('Job post failed:', err);
@@ -69,21 +64,23 @@ const PostJob = () => {
 
   return (
     <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-purple-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white p-6 sticky top-0 min-h-screen shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 animate-pulse">Time Pro</h2>
-        <nav className="flex flex-col space-y-5 text-md">
-          <Link to="/provider" className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded text-white font-semibold hover:bg-white/20">
-            <FaUserCircle /> Profile Overview
-          </Link>
-          <Link to="/post-job" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
-            <FaPlusCircle /> Post New Job
-          </Link>
-          <Link to="/provider/posted-jobs" className="flex items-center gap-3 hover:bg-white/10 px-4 py-2 rounded transition-all">
-            <FaBriefcase /> Manage Jobs
-          </Link>
-        </nav>
-      </aside>
+     {/* Sidebar */}
+           <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+             <h2 className="text-2xl font-bold mb-6">Time Pro</h2>
+             <nav className="flex flex-col space-y-5 text-md">
+               <Link to="/provider" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded font-semibold">
+                 <FaUserCircle /> Profile Overview
+               </Link>
+               <Link to="/post-job" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition">
+                 <FaPlusCircle /> Post New Job
+               </Link>
+               <Link to="/provider/posted-jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition">
+                 <FaBriefcase /> Manage Jobs
+               </Link>
+             </nav>
+           </aside>
+     
+
 
       {/* Main Content */}
       <main className="flex-1">
@@ -95,7 +92,7 @@ const PostJob = () => {
           </div>
           <Link
             to="/login"
-            className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition"
+            className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-600 transition"
           >
             Logout
           </Link>
@@ -103,8 +100,8 @@ const PostJob = () => {
 
         {/* Form Section */}
         <section className="flex justify-center py-10 px-4 bg-gradient-to-br from-blue-50 via-white to-purple-100">
-          <div className="bg-white p-8 rounded-2xl w-full max-w-3xl shadow-xl border-2 border-blue-500">
-            <h2 className="text-3xl font-bold text-blue-800 mb-2">Post a New Job</h2>
+          <div className="bg-white p-8 rounded-2xl w-full max-w-3xl shadow-xl border-t-4 border-cyan-800">
+            <h2 className="text-3xl font-bold text-cyan-800 mb-2">Post a New Job</h2>
             <p className="text-sm text-gray-500 mb-6">Fill in the information below to create a new job listing.</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -116,7 +113,7 @@ const PostJob = () => {
                   value={jobData.title}
                   onChange={handleChange}
                   required
-                  className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none"
+                  className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-500 outline-none"
                 />
                 <input
                   type="text"
@@ -125,7 +122,7 @@ const PostJob = () => {
                   value={jobData.companyName}
                   onChange={handleChange}
                   required
-                  className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none"
+                  className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-500 outline-none"
                 />
               </div>
 
@@ -135,7 +132,7 @@ const PostJob = () => {
                 placeholder="Location"
                 value={jobData.location}
                 onChange={handleChange}
-                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none w-full"
+                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-500 outline-none w-full"
               />
 
               <textarea
@@ -145,7 +142,7 @@ const PostJob = () => {
                 onChange={handleChange}
                 rows={4}
                 required
-                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none w-full"
+                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-500 outline-none w-full"
               ></textarea>
 
               <input
@@ -154,7 +151,7 @@ const PostJob = () => {
                 placeholder="Salary (e.g., ₹15000/month)"
                 value={jobData.salary}
                 onChange={handleChange}
-                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none w-full"
+                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-500 outline-none w-full"
               />
 
               <input
@@ -163,13 +160,13 @@ const PostJob = () => {
                 placeholder="Required Skills (comma-separated)"
                 value={jobData.skills}
                 onChange={handleChange}
-                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none w-full"
+                className="p-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-500 outline-none w-full"
               />
 
               <div className="text-right">
                 <button
                   type="submit"
-                  className="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition-all shadow-md"
+                  className="bg-cyan-800 text-white px-6 py-2 rounded-full hover:bg-cyan-600 transition-all shadow-md"
                 >
                   Post Job
                 </button>

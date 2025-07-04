@@ -22,7 +22,6 @@ const AdminPayments = () => {
         console.error("Error fetching payments:", err);
       }
     };
-
     fetchPayments();
   }, []);
 
@@ -32,40 +31,15 @@ const AdminPayments = () => {
   const totalPages = Math.ceil(payments.length / PAYMENTS_PER_PAGE);
 
   return (
-    <div className="flex min-h-screen font-sans">
+    <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-blue-100">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-        <nav className="flex flex-col mt-10 space-y-5 text-md">
-          <Link
-            to="/admin"
-            className="text-xl font-bold text-white mb-4 border-b border-white pb-2"
-          >
-            Admin Dashboard
-          </Link>
-
-          <Link
-            to="/admin/manage-jobs"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaBriefcase className="text-lg" />
-            <span>Manage Jobs</span>
-          </Link>
-
-          <Link
-            to="/admin/user"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaUserGraduate className="text-lg" />
-            <span>Manage Users</span>
-          </Link>
-
-          <Link
-            to="/admin/payment"
-            className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-          >
-            <FaUsers className="text-lg" />
-            <span>Payments</span>
-          </Link>
+      <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+        <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
+        <nav className="flex flex-col space-y-5 text-lg">
+          <Link to="/admin" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded font-semibold">Dashboard</Link>
+          <Link to="/admin/manage-jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaBriefcase /> Manage Jobs</Link>
+          <Link to="/admin/user" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaUserGraduate /> Manage Users</Link>
+          <Link to="/admin/payment" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all"><FaUsers /> Payments</Link>
         </nav>
       </aside>
 
@@ -74,12 +48,12 @@ const AdminPayments = () => {
         {/* Header */}
         <header className="flex justify-between items-center bg-white shadow px-8 py-4">
           <div className="flex items-center gap-4">
-            <img src={logo} alt="Time Pro Logo" className="h-10" />
-            <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
+            <img src={logo} alt="Time Pro Logo" className="h-12" />
+            <h3 className="text-2xl font-bold text-gray-800">Time Pro</h3>
           </div>
           <Link
             to="/login"
-            className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 transition"
+            className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition"
           >
             Login
           </Link>
@@ -87,10 +61,10 @@ const AdminPayments = () => {
 
         {/* Payments Table */}
         <section className="p-8">
-          <h1 className="text-3xl font-bold mb-6">All Payments</h1>
-          <div className="overflow-x-auto shadow rounded-lg border border-gray-200">
-            <table className="min-w-full bg-white">
-              <thead className="bg-[#094DB1] text-white">
+          <h1 className="text-3xl font-bold mb-6 text-cyan-800">All Payments</h1>
+          <div className="overflow-x-auto shadow rounded-lg border border-gray-200 bg-white">
+            <table className="min-w-full">
+              <thead className="bg-cyan-800 text-white">
                 <tr>
                   <th className="py-3 px-6 text-left">User Name</th>
                   <th className="py-3 px-6 text-left">Email</th>
@@ -134,7 +108,7 @@ const AdminPayments = () => {
                   key={i}
                   onClick={() => setCurrentPage(i + 1)}
                   className={`px-4 py-2 rounded ${
-                    currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'
+                    currentPage === i + 1 ? 'bg-cyan-800 text-white' : 'bg-gray-200'
                   }`}
                 >
                   {i + 1}

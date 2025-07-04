@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import profilePic from '../assets/profile.png';
 import { FaBriefcase, FaUserGraduate, FaUsers } from 'react-icons/fa';
-
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
+  CartesianGrid,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
+  ResponsiveContainer
 } from 'recharts';
+
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -48,112 +48,98 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-50 font-sans">
+    <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-blue-100">
       {/* Sidebar */}
-     <aside className="w-64 bg-[#094DB1] text-white p-6 sticky top-0 min-h-screen">
-  <nav className="flex flex-col mt-10 space-y-5 text-md">
-    <Link
-      to="/admin"
-      className="text-xl font-bold text-white mb-4 border-b border-white pb-2"
-    >
-      Admin Dashboard
-    </Link>
-
-    <Link
-      to="/admin/manage-jobs"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaBriefcase className="text-lg" />
-      <span>Manage Jobs</span>
-    </Link>
-
-    <Link
-      to="/admin/user"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaUserGraduate className="text-lg" />
-      <span>Manage Users</span>
-    </Link>
-
-    <Link
-      to="/admin/payment"
-      className="flex items-center gap-2 hover:bg-white/10 rounded px-4 py-2 transition"
-    >
-      <FaUsers className="text-lg" />
-      <span>Payments</span>
-    </Link>
-  </nav>
-</aside>
-
+      <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
+        <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
+        <nav className="flex flex-col space-y-5 text-lg">
+          <Link to="/admin" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded font-semibold">
+            Dashboard
+          </Link>
+          <Link to="/admin/manage-jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
+            <FaBriefcase /> Manage Jobs
+          </Link>
+          <Link to="/admin/user" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
+            <FaUserGraduate /> Manage Users
+          </Link>
+          <Link to="/admin/payment" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all">
+            <FaUsers /> Payments
+          </Link>
+        </nav>
+      </aside>
 
       {/* Main */}
       <main className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="flex justify-between items-center bg-white shadow px-8 py-4">
+        <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <img src={logo} alt="Time Pro Logo" className="h-10" />
-            <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
+            <img src={logo} alt="Time Pro Logo" className="h-12" />
+            <h3 className="text-2xl font-bold text-gray-800">Time Pro</h3>
           </div>
-          <Link to="/login" className="bg-[#E4ED73] text-black px-5 py-2 rounded-full hover:bg-blue-700 hover:text-white transition">
+          <Link to="/login" className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition">
             Login
           </Link>
         </header>
 
-        {/* Welcome Board */}
-        <section className="bg-white/40 backdrop-blur-sm border mx-6 mt-8 p-6 rounded-xl flex items-center shadow-lg">
+        {/* Welcome */}
+        <section className="bg-white/60 backdrop-blur border mx-6 mt-8 p-6 rounded-xl flex items-center shadow-lg">
           <div className="py-3 px-6">
-            <img src={profilePic} alt="Admin" className="w-28 h-28 rounded-full object-cover shadow-lg ring-2 ring-white" />
+            <img src={profilePic} alt="Admin" className="w-24 h-24 rounded-full object-cover shadow-lg ring-2 ring-white" />
           </div>
           <div className="px-8 mr-9 mt-4">
-            <h2 className="text-3xl font-bold text-[#1F2937]">Welcome Admin!</h2>
-            <p className="text-sm text-gray-600 mt-1">Manage job listings, users, and monitor performance in one place.</p>
-            <p className="text-md text-gray-700 mt-2">You're in control of the Time Pro platform. Let’s empower students with the right jobs!</p>
+            <h2 className="text-3xl font-bold text-gray-800">Welcome Admin!</h2>
+            <p className="text-sm text-gray-600 mt-1">Monitor jobs, users, payments in one place.</p>
+            <p className="text-md text-gray-700 mt-2">You're in control of the Time Pro platform.</p>
           </div>
         </section>
 
         {/* Stats */}
         <section className="px-8 mt-10">
-          <h3 className="text-2xl font-bold mb-6 text-gray-800">Platform Overview</h3>
+          <h3 className="text-2xl font-bold mb-6 text-cyan-800">Platform Overview</h3>
           {loading ? (
             <p className="text-center text-gray-600">Loading stats...</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 border-b pb-8">
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center border-t-2 border-blue-500">
-                <FaBriefcase className="text-4xl mx-auto mb-2 text-[#094DB1]" />
-                <h4 className="text-lg font-semibold text-gray-800">Active Job Postings</h4>
-                <p className="text-3xl mt-2 text-black">{stats.totalJobs}</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              <div className="bg-white p-6 rounded-xl text-center shadow-md border-t-4 border-cyan-800">
+                <FaBriefcase className="text-4xl mx-auto mb-2 text-cyan-700" />
+                <h4 className="text-lg font-semibold text-gray-800">Active Jobs</h4>
+                <p className="text-3xl mt-2">{stats.totalJobs}</p>
               </div>
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center border-t-2 border-blue-500">
-                <FaUserGraduate className="text-4xl mx-auto mb-2 text-[#094DB1]" />
-                <h4 className="text-lg font-semibold text-gray-800">Total Applicants</h4>
-                <p className="text-3xl mt-2 text-black">{stats.totalApplications}</p>
+              <div className="bg-white p-6 rounded-xl text-center shadow-md border-t-4 border-cyan-800">
+                <FaUserGraduate className="text-4xl mx-auto mb-2 text-cyan-700" />
+                <h4 className="text-lg font-semibold text-gray-800">Applications</h4>
+                <p className="text-3xl mt-2">{stats.totalApplications}</p>
               </div>
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 text-center border-t-2 border-blue-500 ">
-                <FaUsers className="text-4xl mx-auto mb-2 text-[#094DB1]" />
-                <h4 className="text-lg font-semibold text-gray-800">Total Users</h4>
-                <p className="text-3xl mt-2 text-black">{stats.totalUsers}</p>
+              <div className="bg-white p-6 rounded-xl text-center shadow-md border-t-4 border-cyan-800">
+                <FaUsers className="text-4xl mx-auto mb-2 text-cyan-700" />
+                <h4 className="text-lg font-semibold text-gray-800">Registered Users</h4>
+                <p className="text-3xl mt-2">{stats.totalUsers}</p>
               </div>
             </div>
           )}
         </section>
+ {/* Chart */}
+{!loading && (
+  <section className="mx-auto mb-12 w-[90%] max-w-4xl">
+    <ResponsiveContainer width="100%" height={300}>
+      <LineChart data={data} margin={{ top: 10, right: 30, left: 10, bottom: 8 }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis allowDecimals={false} />
+        <Tooltip />
+        <Line
+          type="monotone"
+          dataKey="value"
+          stroke="#155e75"
+          strokeWidth={3}
+          activeDot={{ r: 6 }}
+        />
+      </LineChart>
+    </ResponsiveContainer>
+  </section>
+)}
 
-        {/* Chart */}
-        {!loading && (
-          <div className="mx-auto mb-12" style={{ width: '80%', height: 300 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={data}
-                margin={{ top: 5, right: 30, left: 20, bottom: 8 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis allowDecimals={false} />
-                <Tooltip />
-                <Bar dataKey="value" fill="#094DB1" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        )}
+       
 
         {/* Footer */}
         <footer className="bg-white py-4 text-center text-sm text-gray-500 border-t mt-auto">
@@ -161,6 +147,8 @@ const AdminDashboard = () => {
           <p>© 2025 Time Pro • Empowering careers one job at a time.</p>
         </footer>
       </main>
+      
+     
     </div>
   );
 };
