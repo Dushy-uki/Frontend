@@ -82,7 +82,7 @@ const PostedJobs = () => {
             to="/login"
             className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-600 transition"
           >
-            Logout
+            Login
           </Link>
         </header>
 
