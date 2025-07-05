@@ -128,7 +128,7 @@ function App() {
 
     {/* Glowing CTA Button */}
     <Link
-      to="/get-started"
+      to="/login"
       className="relative overflow-hidden group bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-8 py-4 rounded-full shadow-lg transition"
     >
       <span className="relative z-10">Get Started</span>
