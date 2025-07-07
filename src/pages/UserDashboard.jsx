@@ -12,6 +12,7 @@ import {
   FaFileAlt
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { title } from 'framer-motion/client';
 
 const UserDashboard = () => {
   const [user, setUser] = useState({});
@@ -143,7 +144,8 @@ const UserDashboard = () => {
               title: 'Update Resume',
               img: cv,
               link: '/resume'
-            }].map(({ title, img, link }, index) => (
+            }
+           ].map(({ title, img, link }, index) => (
               <motion.div
                 key={title}
                 whileHover={{ scale: 1.05 }}
