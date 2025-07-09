@@ -17,6 +17,7 @@ const ApplicationsByJob = () => {
   const { jobId } = useParams();
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('all');
 
   const fetchApplications = async () => {
     try {
@@ -56,6 +57,11 @@ const ApplicationsByJob = () => {
     if (jobId) fetchApplications();
   }, [jobId]);
 
+  const filteredApplications =
+    filter === 'all'
+      ? applications
+      : applications.filter((app) => app.status === filter);
+
   return (
     <div className="flex min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-cyan-50">
       {/* Sidebar */}
@@ -87,7 +93,7 @@ const ApplicationsByJob = () => {
               <FaArrowLeft size={22} />
             </Link>
             <img src={logo} alt="Time Pro Logo" className="h-10" />
-            <h2 className="text-2xl font-bold text-gray-800">Applications</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Time Pro</h2>
           </div>
           <Link
             to="/login"
@@ -97,15 +103,32 @@ const ApplicationsByJob = () => {
           </Link>
         </header>
 
+        {/* Filter Buttons */}
+        <div className="flex justify-center gap-4 mt-6 mb-6">
+          {['all', 'accepted', 'rejected', 'pending'].map((status) => (
+            <button
+              key={status}
+              onClick={() => setFilter(status)}
+              className={`px-4 py-2 rounded-full font-medium border transition duration-300 ${
+                filter === status
+                  ? 'bg-cyan-600 text-white border-cyan-600'
+                  : 'bg-white text-cyan-600 border-cyan-600 hover:bg-cyan-100'
+              }`}
+            >
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </button>
+          ))}
+        </div>
+
         {/* Applications Content */}
         <section className="p-10">
           {loading ? (
             <p className="text-gray-500">Loading applications...</p>
-          ) : applications.length === 0 ? (
-            <p className="text-gray-500">No applications found for this job.</p>
+          ) : filteredApplications.length === 0 ? (
+            <p className="text-gray-500">No applications found for this filter.</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {applications.map((app) => (
+              {filteredApplications.map((app) => (
                 <motion.div
                   key={app._id}
                   whileHover={{ scale: 1.02 }}

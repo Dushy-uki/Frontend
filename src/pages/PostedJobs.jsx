@@ -76,7 +76,7 @@ const PostedJobs = () => {
         <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-10" />
-            <h2 className="text-2xl font-bold text-gray-800">Your Posted Jobs</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Time Pro</h2>
           </div>
           <Link
             to="/login"

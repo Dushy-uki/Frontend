@@ -139,7 +139,7 @@ const ManageUsers = () => {
                           <select name="role" value={editFormData.role} onChange={handleEditChange} className="border p-1 rounded w-full">
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
-                            <option value="partner">Partner</option>
+                            <option value="provider">Provider</option>
                           </select>
                         </td>
                         <td className="py-3 px-6">{new Date(user.createdAt).toLocaleDateString()}</td>

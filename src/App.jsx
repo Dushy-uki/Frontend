@@ -30,8 +30,8 @@ function App() {
   return (
     <>
      <ToastContainer
-        position="top-right"  // You can choose position
-        autoClose={3000}      // Toast auto close time in ms
+        position="top-right"  
+        autoClose={3000}      
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
