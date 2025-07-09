@@ -20,7 +20,9 @@ import AdminPayments from './pages/AdminPayment.jsx';
 import Provider from './pages/Providers.jsx';
 import PostedJobs from './pages/PostedJobs.jsx';
 import ProviderApplication from './pages/ProviderApplication.jsx';
-import ApplicationsByJob from './pages/ProviderApplication.jsx'; // adjust path as needed
+import ApplicationsByJob from './pages/ProviderApplication.jsx'; 
+import ResetPassword from './pages/ResetPassword';
+import ForgotPassword from './pages/ForgotPassword.jsx';
 
 
 
@@ -60,6 +62,8 @@ function App() {
       <Route path="/provider/posted-jobs" element={<PostedJobs />} />
       <Route path="/provider/applications" element={<ProviderApplication />} />
       <Route path="/job/:jobId/applications" element={<ApplicationsByJob />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
 
       {/* Add more routes as needed */}

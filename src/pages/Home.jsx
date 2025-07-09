@@ -5,7 +5,7 @@ import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
 
 import logo from "../assets/logo.png";
-import bg from "../assets/images.jpeg";
+import bg from "../assets/hero.avif";
 import bg2 from "../assets/img1.jpg";
 import p1 from "../assets/brainstorm_1427161.png";
 import p2 from "../assets/direction_10547456.png";
@@ -59,21 +59,31 @@ function App() {
             </Link>
           </div>
         </div>
-        <motion.div
-  className="relative z-10 mt-10 md:mt-0 mr-[60px] md:w-[40%] lg:w-[40%] group"
+  <motion.div
+  className="relative z-10 mt-10 md:mt-0 mr-40"
   initial={{ opacity: 0, scale: 0.9 }}
   animate={{ opacity: 1, scale: 1 }}
   transition={{ duration: 1 }}
 >
-  <div className="relative overflow-hidden rounded-5xl shadow-2xl">
+  <div
+    className="relative overflow-hidden shadow-2xl w-full max-w-[600px] h-[500px] border-6 border-cyan-400"
+    style={{ clipPath: "inset(0 0 0 0 round 30% 30% 30% 30%)" }}
+  >
     <motion.img
       src={bg}
       alt="team working"
-      className="w-200 max-w-[600px] rounded-2xl mx-auto object-cover group-hover:scale-105 transition-transform duration-500"
+      className="w-full h-full object-cover transition-transform duration-500"
+      style={{ clipPath: "inset(0 0 0 0 round 30% 30% 30% 30%)" }}
+      whileHover={{ scale: 1.05 }}
     />
-    <motion.div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none" />
+    <motion.div
+      className="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none"
+      whileHover={{ opacity: 0.1 }}
+      style={{ clipPath: "inset(0 0 0 0 round 30% 30% 30% 30%)" }}
+    />
   </div>
 </motion.div>
+
 
       </section>
 

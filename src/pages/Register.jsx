@@ -4,6 +4,7 @@ import axios from 'axios';
 import login from '../assets/loginbg.jpg';
 import logo from '../assets/logo.png';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -22,12 +23,12 @@ const Register = () => {
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, formData);
       if (res.status === 201 || res.status === 200) {
-        alert('Registration successful! Please login.');
+        toast.success('Registration successful! Please login.');
         navigate('/login');
       }
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.error || 'Registration failed.');
+      toast.error(err.response?.data?.error || 'Registration failed.');
     }
   };
 
