@@ -66,7 +66,7 @@ function App() {
   transition={{ duration: 1 }}
 >
   <div
-    className="relative overflow-hidden shadow-2xl w-full max-w-[600px] h-[500px] border-6 border-cyan-400"
+    className="relative overflow-hidden shadow-2xl w-full max-w-[550px] h-[450px] border-6 border-cyan-400"
     style={{ clipPath: "inset(0 0 0 0 round 30% 30% 30% 30%)" }}
   >
     <motion.img

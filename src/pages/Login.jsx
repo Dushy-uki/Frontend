@@ -71,7 +71,7 @@ const Login = () => {
       style={{ backgroundImage: `url(${loginBg})` }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
+      <div className="absolute inset-0 opacity-50 z-0"></div>
 
       {/* Login Box */}
       <div className="z-10 w-full max-w-md bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-xl">
