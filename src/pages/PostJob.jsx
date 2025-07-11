@@ -88,7 +88,7 @@ const PostJob = () => {
         <header className="bg-white flex items-center justify-between px-8 py-4 shadow">
           <div className="flex items-center gap-3">
             <img src={logo} alt="Logo" className="w-10 h-10 rounded-full" />
-            <h1 className="text-xl font-bold text-gray-800">Time Pro</h1>
+            <h1 className="text-xl font-bold text-cyan-600">Time Pro</h1>
           </div>
           <Link
             to="/login"

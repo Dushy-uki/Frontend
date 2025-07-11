@@ -84,7 +84,7 @@ const MyApplications = () => {
         <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-12" />
-            <h3 className="text-2xl font-bold text-gray-800">Time Pro</h3>
+            <h3 className="text-2xl font-bold text-cyan-600">Time Pro</h3>
           </div>
           <Link
             to="/login"

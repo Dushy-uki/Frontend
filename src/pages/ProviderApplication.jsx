@@ -93,7 +93,7 @@ const ApplicationsByJob = () => {
               <FaArrowLeft size={22} />
             </Link>
             <img src={logo} alt="Time Pro Logo" className="h-10" />
-            <h2 className="text-2xl font-bold text-gray-800">Time Pro</h2>
+            <h2 className="text-2xl font-bold text-cyan-600">Time Pro</h2>
           </div>
           <Link
             to="/login"
@@ -152,25 +152,32 @@ const ApplicationsByJob = () => {
                     </p>
                   )}
 
-                  <div className="flex gap-3 mt-4">
-                    <button
-                      onClick={() => handleStatusChange(app._id, 'accepted')}
-                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded-full text-sm"
-                    >
-                      Accept
-                    </button>
-                    <button
-                      onClick={() => handleStatusChange(app._id, 'rejected')}
-                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-full text-sm"
-                    >
-                      Reject
-                    </button>
-                    <button
-                      onClick={() => handleStatusChange(app._id, 'pending')}
-                      className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-full text-sm"
-                    >
-                      Pending
-                    </button>
+                  {/* Conditional Status Buttons */}
+                  <div className="flex gap-3 mt-4 flex-wrap">
+                    {app.status !== 'accepted' && (
+                      <button
+                        onClick={() => handleStatusChange(app._id, 'accepted')}
+                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded-full text-sm"
+                      >
+                        Accept
+                      </button>
+                    )}
+                    {app.status !== 'rejected' && (
+                      <button
+                        onClick={() => handleStatusChange(app._id, 'rejected')}
+                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-full text-sm"
+                      >
+                        Reject
+                      </button>
+                    )}
+                    {app.status !== 'pending' && (
+                      <button
+                        onClick={() => handleStatusChange(app._id, 'pending')}
+                        className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-full text-sm"
+                      >
+                        Pending
+                      </button>
+                    )}
                   </div>
                 </motion.div>
               ))}

@@ -1,3 +1,4 @@
+// ...imports stay the same
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -9,6 +10,8 @@ const GenerateResume = () => {
     name: '',
     email: '',
     phone: '',
+    github: '',
+    summary: '',
     education: [],
     skills: {
       Frontend: '',
@@ -17,7 +20,6 @@ const GenerateResume = () => {
       Languages: ''
     },
     experience: []
-    
   });
 
   const [loading, setLoading] = useState(false);
@@ -128,6 +130,9 @@ const GenerateResume = () => {
         {
           name: formData.name,
           email: formData.email,
+          phone: formData.phone,
+          github: formData.github,
+          summary: formData.summary,
           skills: {
             Frontend: formData.skills.Frontend.split(',').map(s => s.trim()),
             Backend: formData.skills.Backend.split(',').map(s => s.trim()),
@@ -182,7 +187,7 @@ const GenerateResume = () => {
         <header className="bg-white shadow px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-12" />
-            <h3 className="text-2xl font-bold text-gray-800">Time Pro</h3>
+            <h3 className="text-2xl font-bold text-cyan-600">Time Pro</h3>
           </div>
           <Link to="/dashboard" className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition">
             Dashboard
@@ -197,12 +202,26 @@ const GenerateResume = () => {
               <input name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" className="input" required />
               <input name="email" value={formData.email} onChange={handleChange} placeholder="Email" className="input" required />
               <input name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" className="input" />
+              <input name="github" value={formData.github} onChange={handleChange} placeholder="GitHub Profile URL" className="input" />
+            </div>
+
+            {/* Summary */}
+            <div>
+              <h4 className="text-lg font-semibold mt-6 mb-2"> Summary</h4>
+              <textarea
+                name="summary"
+                value={formData.summary}
+                onChange={handleChange}
+                placeholder="Brief summary about your background and goals"
+                className="input"
+                rows={4}
+              />
             </div>
 
             {/* Skills */}
             <div>
               <h4 className="text-lg font-semibold mt-6 mb-2">Skills (comma separated)</h4>
-              {["Frontend", "Backend", "DevOps", "Languages"].map((cat) => (
+              {["Frontend", "Backend", "Languages"].map((cat) => (
                 <input
                   key={cat}
                   placeholder={`${cat} Skills`}

@@ -69,7 +69,7 @@ const ViewApplications = () => {
         <header className="bg-white flex items-center justify-between px-8 py-4 shadow">
           <div className="flex items-center gap-4">
             <img src={logo} alt="Logo" className="h-10 w-10 rounded-full" />
-            <h1 className="text-xl font-bold text-gray-800">Time Pro</h1>
+            <h1 className="text-xl font-bold text-cyan-600">Time Pro</h1>
           </div>
           <Link to="/login" className="bg-cyan-600 text-black px-5 py-2 rounded-full hover:bg-cyan-800 transition">
             Login

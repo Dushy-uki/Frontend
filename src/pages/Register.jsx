@@ -120,7 +120,7 @@ const Register = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-cyan-400 to-[#6A1B9A] text-white py-2 rounded-full font-bold hover:opacity-90 transition"
+            className="w-full bg-gradient-to-tr from-cyan-800 to-white text-white py-2 rounded-full font-bold hover:opacity-90 transition"
           >
             Sign Up
           </button>

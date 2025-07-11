@@ -82,7 +82,7 @@ const AdminDashboard = () => {
         </header>
 
         {/* Welcome */}
-        <section className="bg-white/60 backdrop-blur border mx-6 mt-8 p-6 rounded-xl flex items-center shadow-lg">
+        <section className="bg-white/60 backdrop-blur  mx-6 mt-8 p-6 rounded-xl flex items-center shadow-lg">
           <div className="py-3 px-6">
             <img src={profilePic} alt="Admin" className="w-24 h-24 rounded-full object-cover shadow-lg ring-2 ring-white" />
           </div>

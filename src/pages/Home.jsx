@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import bg from "../assets/hero.avif";
 import bg2 from "../assets/img1.jpg";
-import p1 from "../assets/brainstorm_1427161.png";
-import p2 from "../assets/direction_10547456.png";
+import p1 from "../assets/browsing .png";
+import p2 from "../assets/resume.png";
 
 function App() {
   useEffect(() => {
@@ -26,15 +26,15 @@ function App() {
   return (
     <div className="font-sans">
       {/* Header */}
-      <nav className="absolute top-0 left-0 w-full bg-white/80 shadow-md py-3 px-8 flex justify-between items-center z-20">
+      <nav className="absolute fixed top-0 left-0 w-full  shadow-md py-3 px-8 flex justify-between items-center z-20">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="Time Pro Logo" className="h-10 ml-8" />
-          <h2 className="text-xl font-bold text-[#0A4DA2]">Time Pro</h2>
+          <img src={logo} alt="Time Pro Logo" className="h-8 ml-8 rounded-full object-cover bg-white shadow-lg ring-2 ring-white" />
+          <h2 className="text-xl font-bold text-cyan-400">Time Pro</h2>
         </div>
         <div className="space-x-4">
-          <Link to="/" className="text-[#0A4DA2] font-medium hover:underline">Home</Link>
-          <Link to="/login" className="text-[#0A4DA2] font-medium hover:underline">Login</Link>
-          <Link to="/register" className="bg-[#0A4DA2] text-white px-4 py-1 rounded-full hover:bg-[#094db1] transition">Sign Up</Link>
+          <Link to="/" className="text-cyan-400 font-medium hover:underline">Home</Link>
+          <Link to="/login" className="text-cyan-400 font-medium hover:underline">Login</Link>
+          <Link to="/register" className="bg-cyan-400 text-white px-4 py-1 rounded-full hover:bg-cyan-500 transition">Sign Up</Link>
         </div>
       </nav>
 
@@ -44,7 +44,7 @@ function App() {
         <div className="relative z-10 max-w-lg space-y-6 text-white ml-45">
           <h1 className="text-5xl font-extrabold leading-tight drop-shadow-xl [text-shadow:_0_4px_4px_rgb(99_102_241_/_0.8)]">
             Discover Your <br />
-            <span className="text-cyan-400">Dream Part-Time</span> <br />
+            <span className="text-cyan-400 text-5xl">Dream Part-Time</span> <br />
             With Time Pro
           </h1>
           <p className="text-lg text-gray-300 drop-shadow-lg">
@@ -112,7 +112,7 @@ function App() {
   <div className="max-w-4xl mx-auto flex flex-col items-center space-y-6 relative">
     {/* Layer 1 - Bottom */}
     <div className="relative w-full" data-aos="fade-up">
-      <div className="w-full bg-gradient-to-r from-cyan-700 to-cyan-500 text-white px-6 py-6 shadow-lg text-center rounded-md">
+      <div className="w-full bg-gradient-to-r from-cyan-800 to-cyan-500 text-white px-6 py-6 shadow-lg text-center rounded-md">
         <div className="flex items-center justify-center gap-4">
           <div className="bg-white text-cyan-700 w-18 h-18 flex flex-col items-center justify-center rounded-full text-[13px] font-bold shadow leading-tight">
             <span className="text-xs">STEP</span>
@@ -128,7 +128,7 @@ function App() {
 
     {/* Layer 2 */}
     <div className="relative w-[90%]" data-aos="fade-up" data-aos-delay="100">
-      <div className="w-full bg-gradient-to-r from-cyan-600 to-cyan-400 text-white px-6 py-6 shadow-lg text-center rounded-md">
+      <div className="w-full bg-gradient-to-r from-cyan-700 to-cyan-400 text-white px-6 py-6 shadow-lg text-center rounded-md">
         <div className="flex items-center justify-center gap-4">
           <div className="bg-white mr-5 text-cyan-600 w-18 h-18 flex flex-col items-center justify-center rounded-full text-[13px] font-bold shadow leading-tight">
             <span className="text-xs">STEP</span>
@@ -144,7 +144,7 @@ function App() {
 
     {/* Layer 3 */}
     <div className="relative w-[80%]" data-aos="fade-up" data-aos-delay="200">
-      <div className="w-full bg-gradient-to-r from-cyan-500 to-cyan-300 text-white px-6 py-6 shadow-lg text-center rounded-md">
+      <div className="w-full bg-gradient-to-r from-cyan-600 to-cyan-400 text-white px-6 py-6 shadow-lg text-center rounded-md">
         <div className="flex items-center justify-center gap-4">
           <div className="bg-white mr-3 text-cyan-500 w-18 h-18 flex flex-col items-center justify-center rounded-full text-[13px] font-bold shadow leading-tight">
             <span className="text-xs">STEP</span>
@@ -160,7 +160,7 @@ function App() {
 
     {/* Layer 4 - Top */}
     <div className="relative w-[70%] ml-3" data-aos="fade-up" data-aos-delay="300">
-      <div className="w-full bg-gradient-to-r from-cyan-400 to-cyan-200 text-white px-6 py-6 shadow-lg text-center rounded-md">
+      <div className="w-full bg-gradient-to-r from-cyan-500 to-cyan-400 text-white px-6 py-6 shadow-lg text-center rounded-md">
         <div className="flex items-center justify-center gap-4">
           <div className="bg-white ml-3 text-cyan-400 w-18 h-18 flex flex-col items-center justify-center rounded-full text-[13px] font-bold shadow leading-tight">
             <span className="text-xs">STEP</span>

@@ -55,7 +55,7 @@ const JobListingPage = () => {
       <aside className="w-64 bg-cyan-600 text-white p-6 sticky top-0 min-h-screen shadow-xl">
         <h2 className="text-2xl font-bold mb-6 text-white">Time Pro</h2>
         <nav className="flex flex-col space-y-5 text-lg">
-          <Link to="/dashboard" className="flex items-center gap-3 bg-cyan-800 px-4 py-2 rounded font-semibold hover:bg-cyan-400 transition-all duration-300">
+          <Link to="/dashboard" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded font-semibold transition-all duration-300">
             <FaHome /> Dashboard
           </Link>
           <Link to="/jobs" className="flex items-center gap-3 hover:bg-cyan-800 px-4 py-2 rounded transition-all duration-300">
@@ -84,7 +84,7 @@ const JobListingPage = () => {
         >
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-10" />
-            <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
+            <h3 className="text-2xl font-bold text-cyan-600">Time Pro</h3>
           </div>
           <Link
             to="/login"

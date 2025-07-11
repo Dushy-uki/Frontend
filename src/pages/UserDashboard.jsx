@@ -76,7 +76,7 @@ const UserDashboard = () => {
         >
           <div className="flex items-center gap-4">
             <img src={logo} alt="Time Pro Logo" className="h-10" />
-            <h3 className="text-2xl font-bold text-[#1F1F1F]">Time Pro</h3>
+            <h3 className="text-2xl font-bold text-cyan-600">Time Pro</h3>
           </div>
           <Link to="/login" className="bg-[#0e4245] text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition">
             Login
@@ -88,7 +88,7 @@ const UserDashboard = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white/90 backdrop-blur-sm mx-6 mt-8 p-6 rounded-xl flex items-center shadow-lg border-2 border-[#0e4245]"
+          className="bg-white/90 backdrop-blur-sm mx-6 mt-8 p-6 bg-gradient-to-tr from-cyan-800 to-white rounded-xl flex items-center shadow-lg "
         >
           <div className="py-3 px-6">
             <motion.img
@@ -115,7 +115,7 @@ const UserDashboard = () => {
             )}
             {user.bio && (
               <p className="text-sm text-gray-700 mt-1">
-                <span className="font-semibold text-cyan-500">Bio:</span> {user.bio}
+                <span className="font-semibold text-black">Bio:</span> {user.bio}
               </p>
             )}
           </div>
@@ -152,7 +152,7 @@ const UserDashboard = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
-                className="bg-white p-7 rounded-xl shadow hover:shadow-xl text-center transition border-2 border-[#0e4245]"
+                className="bg-white p-7 rounded-xl shadow hover:shadow-xl text-center transition border-t-4 border-[#0e4245]"
               >
                 <img src={img} alt={title} className="h-20 mx-auto mb-4" />
                 <h4 className="font-semibold text-lg text-gray-800">{title}</h4>
