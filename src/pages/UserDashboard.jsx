@@ -101,21 +101,21 @@ const UserDashboard = () => {
             />
           </div>
           <div className="px-8 mt-2">
-            <h2 className="text-3xl font-bold text-[#0e4245]">
+            <h2 className="text-3xl font-bold text-white">
               Welcome {user.name || 'User'}!
             </h2>
-            <p className="text-sm text-gray-600 mt-1">{user.email}</p>
-            <p className="text-md text-gray-700 mt-2">
+            <p className="text-md text-white mt-1">{user.email}</p>
+            <p className="text-md text-white mt-2">
               Here's your job dashboard. Let's find your next opportunity.
             </p>
             {user.skills && (
-              <p className="text-sm text-gray-700 mt-2">
+              <p className="text-sm text-white mt-2">
                 <span className="font-semibold text-cyan-500">Skills:</span> {user.skills}
               </p>
             )}
             {user.bio && (
-              <p className="text-sm text-gray-700 mt-1">
-                <span className="font-semibold text-black">Bio:</span> {user.bio}
+              <p className="text-sm text-white mt-1">
+                <span className="font-semibold text-white">Bio:</span> {user.bio}
               </p>
             )}
           </div>

@@ -102,8 +102,8 @@ const JobListingPage = () => {
   animate={{ opacity: 1, y: 0 }} 
   transition={{ duration: 0.8 }}
 >
-  <h2 className="text-3xl font-bold mb-2 text-gray-800">Find Your Dream Job</h2>
-  <p className="mb-6 text-gray-700">Discover opportunities that match your skills and passion</p>
+  <h2 className="text-3xl font-bold mb-2 text-white">Find Your Dream Job</h2>
+  <p className="mb-6 text-white">Discover opportunities that match your skills and passion</p>
   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
     <input type="text" placeholder="Job title or keyword" className="p-3 rounded-lg text-black border border-gray-300 outline-[#E4ED73]" value={filters.keyword} onChange={(e) => setFilters({ ...filters, keyword: e.target.value })} onKeyDown={handleKeyDown} />
     <input type="text" placeholder="Location" className="p-3 rounded-lg text-black border border-gray-300 outline-[#E4ED73]" value={filters.location} onChange={(e) => setFilters({ ...filters, location: e.target.value })} onKeyDown={handleKeyDown} />
