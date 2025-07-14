@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import { toast } from 'react-toastify';
 import { FaHome, FaBriefcase, FaClipboardList, FaUserEdit, FaFileAlt } from 'react-icons/fa';
+import axios from 'axios';
 
 
 const ApplyJob = () => {
@@ -29,10 +30,9 @@ const ApplyJob = () => {
 
     const fetchJob = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/jobs/${jobId}`);
-        const data = await res.json();
-        if (res.ok) {
-          setJobTitle(data.title);
+        const res = await axios.get(`http://localhost:5000/api/jobs`);
+        if (res.status === 200) {
+          setJobTitle(res.data.title);
         }
       } catch (err) {
         console.error('Failed to fetch job', err);
@@ -55,24 +55,28 @@ const ApplyJob = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/applications/apply/${jobId}`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const res = await axios.post(
+        `http://localhost:5000/api/applications/apply/${jobId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            // 'Content-Type' will be set automatically by Axios for FormData
+          },
+        }
+      );
 
-      const data = await res.json();
-      if (res.ok) {
+      if (res.status === 200 || res.status === 201) {
         toast.success('Applied successfully!');
         navigate('/applications');
       } else {
-        toast.error(data.error || 'Failed to apply');
+        toast.error(res.data?.error || 'Failed to apply');
       }
     } catch (err) {
       console.error(err);
-      toast.error('Something went wrong while applying.');
+      toast.error(
+        err.response?.data?.error || 'Something went wrong while applying.'
+      );
     }
   };
 

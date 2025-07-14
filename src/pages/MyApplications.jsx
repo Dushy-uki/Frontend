@@ -12,29 +12,53 @@ import {
   FaTrash
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
 
 const MyApplications = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchApplications = async () => {
-      const token = localStorage.getItem('token');
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/applications/my`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await res.json();
-        setApplications(data);
-      } catch (error) {
-        console.error('Failed to fetch applications:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchApplications = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/applications/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setApplications(data);
+    } catch (error) {
+      console.error('Failed to fetch applications:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchApplications();
   }, []);
+
+  const handleDelete = async (id) => {
+    if (!confirm('Are you sure you want to delete this application?')) return;
+
+    const token = localStorage.getItem('token');
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/applications/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(data.message || 'Application deleted successfully');
+        setApplications(applications.filter(app => app._id !== id));
+      } else {
+        toast.error(data.error || 'Failed to delete application');
+      }
+    } catch (err) {
+      console.error('Error deleting application:', err);
+      toast.error('An error occurred while deleting');
+    }
+  };
 
   const statusStyle = (status) => {
     switch (status.toLowerCase()) {
@@ -145,7 +169,12 @@ const MyApplications = () => {
                       <td className="px-6 py-4 text-center space-x-2">
                         <button className="text-blue-600 hover:text-blue-800"><FaEye /></button>
                         <button className="text-green-600 hover:text-green-800"><FaEdit /></button>
-                        <button className="text-red-600 hover:text-red-800"><FaTrash /></button>
+                        <button
+                          className="text-red-600 hover:text-red-800"
+                          onClick={() => handleDelete(app._id)}
+                        >
+                          <FaTrash />
+                        </button>
                       </td>
                     </tr>
                   ))}
