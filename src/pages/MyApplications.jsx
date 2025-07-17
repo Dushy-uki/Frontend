@@ -111,10 +111,10 @@ const MyApplications = () => {
             <h3 className="text-2xl font-bold text-cyan-600">Time Pro</h3>
           </div>
           <Link
-            to="/login"
+            to="/dashboard"
             className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-500 transition"
           >
-            Login
+            Dashboard
           </Link>
         </header>
 

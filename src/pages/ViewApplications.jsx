@@ -71,8 +71,8 @@ const ViewApplications = () => {
             <img src={logo} alt="Logo" className="h-10 w-10 rounded-full" />
             <h1 className="text-xl font-bold text-cyan-600">Time Pro</h1>
           </div>
-          <Link to="/login" className="bg-cyan-600 text-black px-5 py-2 rounded-full hover:bg-cyan-800 transition">
-            Login
+          <Link to="/provider" className="bg-cyan-600 text-black px-5 py-2 rounded-full hover:bg-cyan-800 transition">
+            Dashboard
           </Link>
         </header>
 

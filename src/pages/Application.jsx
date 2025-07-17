@@ -112,10 +112,10 @@ const ApplyJob = () => {
             <h3 className="text-2xl font-bold text-cyan-600">Time Pro</h3>
           </div>
           <Link
-            to="/login"
+            to="/dashboard"
             className="bg-cyan-600 text-black px-5 py-2 rounded-full hover:bg-cyan-800 transition"
           >
-            Login
+            Dashboard
           </Link>
         </div>
 

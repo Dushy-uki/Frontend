@@ -91,10 +91,10 @@ const PostJob = () => {
             <h1 className="text-xl font-bold text-cyan-600">Time Pro</h1>
           </div>
           <Link
-            to="/login"
+            to="/provider"
             className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-600 transition"
           >
-            Login
+            Dashboard
           </Link>
         </header>
 

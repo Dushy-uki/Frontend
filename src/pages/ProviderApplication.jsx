@@ -13,6 +13,28 @@ import {
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
+const handleLogout = async () => {
+  const token = localStorage.getItem('token');
+
+  try {
+    await axios.post(
+      'http://localhost:5000/api/auth/logout',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    localStorage.removeItem('token');
+    window.location.href = '/login'; // Redirect to login after logout
+  } catch (err) {
+    console.error('Logout failed:', err);
+    alert('Logout failed. Try again.');
+  }
+};
+
 const ApplicationsByJob = () => {
   const { jobId } = useParams();
   const [applications, setApplications] = useState([]);
@@ -96,10 +118,10 @@ const ApplicationsByJob = () => {
             <h2 className="text-2xl font-bold text-cyan-600">Time Pro</h2>
           </div>
           <Link
-            to="/login"
+            to="/provider"
             className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-cyan-600 transition"
           >
-            Login
+            Dashboard
           </Link>
         </header>
 
