@@ -70,6 +70,7 @@ const AdminPayments = () => {
                   <th className="py-3 px-6 text-left">Email</th>
                   <th className="py-3 px-6 text-left">Purpose</th>
                   <th className="py-3 px-6 text-left">Amount</th>
+                  <th className="py-3 px-6 text-left">Payment Status</th>
                   <th className="py-3 px-6 text-left">Date</th>
                 </tr>
               </thead>
@@ -86,6 +87,19 @@ const AdminPayments = () => {
                       <td className="py-3 px-6">{p.purpose}</td>
                       <td className="py-3 px-6">${(p.amount / 100).toFixed(2)}</td>
                       <td className="py-3 px-6">{new Date(p.date).toLocaleString()}</td>
+                        <td className="p-2">
+          <span
+            className={`px-2 py-1 rounded text-white text-sm ${
+              p.paymentStatus === 'succeeded'
+                ? 'bg-green-500'
+                : p.paymentStatus === 'pending'
+                ? 'bg-yellow-500'
+                : 'bg-gray-400'
+            }`}
+          >
+            {p.paymentStatus || 'unknown'}
+          </span>
+        </td>
                     </tr>
                   ))
                 )}

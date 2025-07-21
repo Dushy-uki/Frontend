@@ -93,34 +93,81 @@ const GenerateResume = () => {
     }));
   };
 
+  // const handlePayment = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!formData.name || !formData.email) {
+  //     alert("Please complete your contact info.");
+  //     return;
+  //   }
+
+  //   if (Object.values(formData.skills).every(val => !val.trim()) || formData.experience.length === 0 || formData.education.length === 0) {
+  //     alert("Please complete skills, experience, and education.");
+  //     return;
+  //   }
+
+  //   setLoading(true);
+  //   try {
+  //     const res = await axios.post('http://localhost:5000/api/payment/create-checkout-session', {
+  //       amount: 500,
+  //       purpose: "Resume Download"
+  //     });
+
+  //     window.location.href = res.data.url;
+  //   } catch (error) {
+  //     console.error('Payment error:', error);
+  //     alert('Payment initiation failed.');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handlePayment = async (e) => {
-    e.preventDefault();
+    const user = JSON.parse(localStorage.getItem('user')); // or from context
+    const userId = user ? user._id : null; // Ensure you have the user ID
+  e.preventDefault();
 
-    if (!formData.name || !formData.email) {
-      alert("Please complete your contact info.");
-      return;
-    }
+  if (!formData.name || !formData.email) {
+    alert("Please complete your contact info.");
+    return;
+  }
 
-    if (Object.values(formData.skills).every(val => !val.trim()) || formData.experience.length === 0 || formData.education.length === 0) {
-      alert("Please complete skills, experience, and education.");
-      return;
-    }
+  if (Object.values(formData.skills).every(val => !val.trim()) || formData.experience.length === 0 || formData.education.length === 0) {
+    alert("Please complete skills, experience, and education.");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      const res = await axios.post('http://localhost:5000/api/payment/create-checkout-session', {
-        amount: 500,
-        purpose: "Resume Download"
-      });
+  setLoading(true);
+  try {
+    // 1. Save payment record with status "pending"
+    await axios.post('http://localhost:5000/api/payment/record', {
+      userId: userId,        // your logged-in user's id here
+      name: formData.name,
+      email: formData.email,
+      amount: 500,           // in cents or your backend's currency unit
+      purpose: "Resume Download",
+    });
 
-      window.location.href = res.data.url;
-    } catch (error) {
-      console.error('Payment error:', error);
-      alert('Payment initiation failed.');
-    } finally {
-      setLoading(false);
-    }
-  };
+    // 2. Create checkout session
+    const sessionRes = await axios.post('http://localhost:5000/api/payment/create-checkout-session', {
+      amount: 500,
+      purpose: "Resume Download",
+      userId: userId,        // pass userId here so metadata includes it for webhook
+      successUrl: 'http://localhost:5173/generate-resume?paid=true',
+      cancelUrl: 'http://localhost:5173/payment-cancel',
+    });
+
+    // 3. Redirect to Stripe checkout page
+    window.location.href = sessionRes.data.url;
+
+  } catch (error) {
+    console.error('Payment error:', error);
+    alert('Payment initiation failed.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const generateAndDownloadResume = async () => {
     setLoading(true);

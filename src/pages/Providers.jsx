@@ -36,6 +36,29 @@ const ProviderProfile = () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     setUser(storedUser || {});
 
+
+    const handleLogout = async () => {
+  const token = localStorage.getItem('token');
+
+  try {
+    await axios.post(
+      'http://localhost:5000/api/auth/logout',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    localStorage.removeItem('token');
+    window.location.href = '/login'; // Redirect to login after logout
+  } catch (err) {
+    console.error('Logout failed:', err);
+    alert('Logout failed. Try again.');
+  }
+};
+
     const fetchJobs = async () => {
       try {
         const token = localStorage.getItem('token');
@@ -93,12 +116,12 @@ const ProviderProfile = () => {
             <img src={logo} alt="Time Pro Logo" className="h-12" />
             <h3 className="text-2xl font-bold text-cyan-600">Time Pro</h3>
           </div>
-          <button
+          {/* <button
             onClick={handleLogout}
             className="bg-cyan-800 text-white px-5 py-2 rounded-full hover:bg-red-400 transition"
             >
            Logout
-         </button> 
+         </button> */}
 
         </header>
 

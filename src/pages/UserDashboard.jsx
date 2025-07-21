@@ -13,6 +13,8 @@ import {
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { title } from 'framer-motion/client';
+import axios from 'axios';
+
 
 const handleLogout = async () => {
   const token = localStorage.getItem('token');
